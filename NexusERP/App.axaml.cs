@@ -1,11 +1,19 @@
+using System;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Net.Http;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Microsoft.EntityFrameworkCore;
+using NexusERP.Data;
+using NexusERP.Services;
 using NexusERP.ViewModels;
 using NexusERP.Views;
+using ReactiveUI;
+using Splat;
 
 namespace NexusERP
 {
@@ -20,9 +28,20 @@ namespace NexusERP
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-                DisableAvaloniaDataAnnotationValidation();
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+
+                // Skonfiguruj po³¹czenie do bazy danych tutaj
+                optionsBuilder.UseMySql(
+                    "Server=10.172.111.78;Database=order_warehouse_db;User=tdyda;Password=Online1234!;",
+                    new MySqlServerVersion(new Version(10, 11, 6))
+                );
+
+                var httpClient = new HttpClient();
+
+                Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
+                Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient), typeof(AuthService));
+
+
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(),
