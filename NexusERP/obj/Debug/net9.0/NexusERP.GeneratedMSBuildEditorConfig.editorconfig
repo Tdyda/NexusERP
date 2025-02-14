@@ -24,5 +24,11 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/AddOrderView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/OrderListView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
