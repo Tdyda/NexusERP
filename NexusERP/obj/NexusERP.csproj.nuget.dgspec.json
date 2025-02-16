@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj": {}
+    "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj": {
+    "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
+        "projectUniqueName": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj",
         "projectName": "NexusERP",
-        "projectPath": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
-        "packagesPath": "C:\\Users\\tdyda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\obj\\",
+        "projectPath": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj",
+        "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tdyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,9 +43,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -78,9 +79,33 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[9.0.0-preview.2.efcore.9.0.0, )"
+            },
+            "Serilog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "avalonia.reactiveui": {
               "target": "Package",
@@ -123,7 +148,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

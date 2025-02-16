@@ -8,12 +8,14 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using NexusERP.Data;
 using NexusERP.Services;
 using NexusERP.ViewModels;
 using NexusERP.Views;
 using ReactiveUI;
 using Splat;
+using Serilog;
 
 namespace NexusERP
 {
@@ -38,14 +40,39 @@ namespace NexusERP
 
                 var httpClient = new HttpClient();
 
-                Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
-                Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient), typeof(AuthService));
-
-
-                desktop.MainWindow = new MainWindow
+                try
                 {
-                    DataContext = new MainWindowViewModel(),
-                };
+                    var logger = new LoggerConfiguration()
+                        .MinimumLevel.Debug()
+                        .WriteTo.Console()
+                        .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
+                        .CreateLogger();
+
+                    var loggerFactory = LoggerFactory.Create(builder =>
+                    {
+                        builder.AddSerilog(logger);
+                    });
+
+                    Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));
+
+                    Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(AuthService));
+
+                    Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
+
+                    Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient, loggerFactory.CreateLogger<AuthService>()), typeof(AuthService));
+
+                    desktop.MainWindow = new MainWindow
+                    {
+                        DataContext = new MainWindowViewModel(),
+                    };
+
+                    logger.Information("Logger configured successfully.");
+                    Console.WriteLine("Logger configured successfully.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error configuring logger: {ex.Message}");
+                }
             }
 
             base.OnFrameworkInitializationCompleted();
