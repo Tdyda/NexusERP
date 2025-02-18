@@ -1,5 +1,5 @@
 <Window xmlns="https://github.com/avaloniaui"
-		xmlns:rxui="http://reactiveui.net"
+        xmlns:rxui="http://reactiveui.net"
         xmlns:app="clr-namespace:NexusERP"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:NexusERP.ViewModels"
@@ -11,9 +11,9 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="NexusERP">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -33,9 +33,13 @@
 
 		<StackPanel>
 			<Menu Grid.Row="1">
-				<MenuItem Header="Dodaj zamówienie" Command="{Binding ShowAddOrder}" />
+				<MenuItem Header="Dodaj zamówienie"
+				  Command="{Binding ShowAddOrder}"
+				  IsEnabled="{Binding CanAccessAddOrder, Mode=TwoWay}"/>
 				<MenuItem Header="Lista zamówień" Command="{Binding ShowOrderList}" />
 			</Menu>
+			<Button Content="Launch" Command="{Binding Launch}" />
+
 		</StackPanel>
 	</Grid>
 

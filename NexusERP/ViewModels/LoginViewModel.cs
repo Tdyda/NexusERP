@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -19,6 +20,16 @@ namespace NexusERP.ViewModels
     {
         private readonly AuthService _authService;
         public string UrlPathSegment => "login";
+        private string? _Text;
+
+        public string? Text
+        {
+            get { return _Text; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _Text, value);
+            }
+        }
 
         public IScreen HostScreen { get; }
 
@@ -28,6 +39,8 @@ namespace NexusERP.ViewModels
             LoginCommand = ReactiveCommand.CreateFromTask(Login);
             this.WhenAnyValue(x => x.Username, x => x.Password).Subscribe();
             HostScreen = screen;
+
+            this.WhenAnyValue(o => o.Text).Subscribe(x => Debug.WriteLine(x));
         }
         private string? _username;
 
@@ -57,6 +70,7 @@ namespace NexusERP.ViewModels
                 {
                     var mainViewModel = new MainWindowViewModel();
                     Debug.WriteLine("Poprawnie zalogowano");
+                    // Możesz spróbować ręcznie wyzwolić zmiany
                 }
             }
             catch (Exception ex)

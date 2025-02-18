@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using NexusERP.Models;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,11 +19,15 @@ namespace NexusERP.Services
         private string _refreshToken;
         private string _userId;
         private ILogger<AuthService> _logger;
+        private UserSession _userSession;
+        private readonly JwtDecoder _jwtDecoder;
 
         public AuthService(HttpClient httpClient, ILogger<AuthService> logger)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _userSession = Locator.Current.GetService<UserSession>() ?? throw new InvalidOperationException("UserSession service not found.");
+            _jwtDecoder = Locator.Current.GetService<JwtDecoder>() ?? throw new InvalidOperationException("JwtDecoder service not found.");
         }
 
         public async Task<bool> RegisterUser(string username, string password)
@@ -32,6 +37,7 @@ namespace NexusERP.Services
             var registerData = new { Username = username, Password = password };
             var response = await _httpClient.PostAsJsonAsync("http://nexusERP.local/api/account/register", registerData);
 
+            _logger.LogInformation(response.ToString());
             if (response.IsSuccessStatusCode)
             {
                 _logger.LogInformation("User registered successfully.");
@@ -46,7 +52,9 @@ namespace NexusERP.Services
 
         public async Task<bool> LoginUser(string username, string password)
         {
-            _logger.LogInformation("LoginUser called.");
+            _logger.LogInformation($"ID: {_userSession.UserId}");
+            _logger.LogInformation($"Zalogowany: {_userSession.IsAuthenticated}");
+
             var loginData = new { Email = username, Password = password };
             var response = await _httpClient.PostAsJsonAsync("http://nexusERP.local/api/account/login", loginData);
 
@@ -63,7 +71,23 @@ namespace NexusERP.Services
                     _httpClient.DefaultRequestHeaders.Authorization =
                         new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
 
-                    _logger.LogInformation($"Logged in as {_userId}");
+                    _userSession.IsAuthenticated = true;
+                    _userSession.UserId = responseData.UserId;
+
+                    var roles = _jwtDecoder.GetRolesFromToken(_authToken);
+
+                    foreach (var role in roles)
+                    {
+                        _userSession.Roles.Add(role);
+                    }
+
+                    _logger.LogInformation($"ID: {_userSession.UserId}");
+                    _logger.LogInformation($"Zalogowany: {_userSession.IsAuthenticated}");
+
+                    foreach (var role in roles)
+                    {
+                        _logger.LogInformation($"Role: {role}");
+                    }
 
                     return true;
                 }
@@ -85,7 +109,7 @@ namespace NexusERP.Services
                 }
 
                 var refreshData = new { RefreshToken = _refreshToken };
-                var response = await _httpClient.PostAsJsonAsync("http://nexusERP.local/api/account/refresh-token", refreshData);
+                var response = await _httpClient.PostAsJsonAsync("http://localhost:5003/api/account/refresh-token", refreshData);
 
                 if (response.IsSuccessStatusCode)
                 {

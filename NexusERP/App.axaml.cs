@@ -16,6 +16,7 @@ using NexusERP.Views;
 using ReactiveUI;
 using Splat;
 using Serilog;
+using NexusERP.Models;
 
 namespace NexusERP
 {
@@ -28,6 +29,7 @@ namespace NexusERP
 
         public override void OnFrameworkInitializationCompleted()
         {
+            //DisableAvaloniaDataAnnotationValidation();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -40,39 +42,28 @@ namespace NexusERP
 
                 var httpClient = new HttpClient();
 
-                try
+                var logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
+                    .CreateLogger();
+
+                var loggerFactory = LoggerFactory.Create(builder =>
                 {
-                    var logger = new LoggerConfiguration()
-                        .MinimumLevel.Debug()
-                        .WriteTo.Console()
-                        .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
-                        .CreateLogger();
+                    builder.AddSerilog(logger);
+                });
 
-                    var loggerFactory = LoggerFactory.Create(builder =>
-                    {
-                        builder.AddSerilog(logger);
-                    });
+                Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
+                Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));
+                Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(AuthService));
+                Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient, loggerFactory.CreateLogger<AuthService>()), typeof(AuthService));
+                Locator.CurrentMutable.RegisterLazySingleton(() => new UserSession(), typeof(UserSession));
+                Locator.CurrentMutable.RegisterLazySingleton(() => new JwtDecoder(), typeof(JwtDecoder));
 
-                    Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));
-
-                    Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(AuthService));
-
-                    Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
-
-                    Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient, loggerFactory.CreateLogger<AuthService>()), typeof(AuthService));
-
-                    desktop.MainWindow = new MainWindow
-                    {
-                        DataContext = new MainWindowViewModel(),
-                    };
-
-                    logger.Information("Logger configured successfully.");
-                    Console.WriteLine("Logger configured successfully.");
-                }
-                catch (Exception ex)
+                desktop.MainWindow = new MainWindow
                 {
-                    Console.WriteLine($"Error configuring logger: {ex.Message}");
-                }
+                    DataContext = new MainWindowViewModel(),
+                };
             }
 
             base.OnFrameworkInitializationCompleted();

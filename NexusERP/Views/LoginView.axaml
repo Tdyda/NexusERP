@@ -22,12 +22,11 @@
 				 UseFloatingWatermark="True"/>
 		<TextBox VerticalAlignment="Center"
                  FontSize="16"
-				 PasswordChar="$"
+				 PasswordChar="*"
                  Text="{Binding Password}"
                  Watermark="Password"
 				 UseFloatingWatermark="True"/>
 		<Button Command="{Binding LoginCommand}" Content="Zaloguj"/>
-
 	</StackPanel>
     
 </UserControl>
