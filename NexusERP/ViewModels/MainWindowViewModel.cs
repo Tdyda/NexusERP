@@ -9,37 +9,42 @@ using System;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Input;
+using DynamicData.Binding;
+using System.Collections.ObjectModel;
+using NexusERP.Interfaces;
 
 namespace NexusERP.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, IScreen
     {
-        private readonly UserSession _userSession;
-        public ICommand Launch { get; }
+        private UserSession _userSession;
+        private bool _canAccessOrderList;
+        private bool _canAccessAddOrder;
+        private bool _canAccessLogout;
         public RoutingState Router { get; } = new RoutingState();
         public ReactiveCommand<Unit, IRoutableViewModel> ShowAddOrder { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ShowOrderList { get; }
-        public List<string> Roles => _userSession.Roles;
-
-        private bool _CanAccessAddOrder;
+        public ReadOnlyObservableCollection<string> Roles => _userSession.Roles;
+        public ICommand Logout { get; }
+        
         public bool CanAccessAddOrder
         {
-            get => _CanAccessAddOrder;
-            set
-            {
-                Debug.WriteLine($"Setting CanAccessAddOrder to {value}");
-                this.RaiseAndSetIfChanged(ref _CanAccessAddOrder, value);
-            }
+            get => _canAccessAddOrder;
+            set => this.RaiseAndSetIfChanged(ref _canAccessAddOrder, value);
+        }
+
+        public bool CanAccessOrderList
+        {
+            get => _canAccessOrderList;
+            set => this.RaiseAndSetIfChanged(ref _canAccessOrderList, value);
+        }
+        public bool CanAccessLogout
+        {
+            get => _canAccessLogout;
+            set => this.RaiseAndSetIfChanged(ref _canAccessLogout, value);
         }
         public MainWindowViewModel()
-        {
-            Launch = ReactiveCommand.Create(() =>
-            {
-                Debug.WriteLine($"CanAccessAddOrder: {CanAccessAddOrder}");
-                CanAccessAddOrder = !CanAccessAddOrder;
-                Debug.WriteLine($"CanAccessAddOrder: {CanAccessAddOrder}");
-            });
-
+        {           
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found.");
 
             Router.Navigate.Execute(new LoginViewModel(this));
@@ -50,22 +55,33 @@ namespace NexusERP.ViewModels
             ShowOrderList = ReactiveCommand.CreateFromObservable(
                 () => NavigateWithAuthorization(new OrderListViewModel(this)));
 
-            this.WhenAnyValue(us => us._userSession)
-                .Where(session => session != null)
-                .Select(session => session.Roles.Contains("admin"))
-                .Subscribe(x =>
+            _userSession.Roles
+                 .ObserveCollectionChanges()
+                 .Subscribe(_ =>
+                 {
+                     CanAccessAddOrder = _userSession.Roles.Contains("admin");
+                 });
+
+            _userSession
+                .WhenAnyValue(x => x.IsAuthenticated)
+                .Subscribe(isAuthenticated =>
                 {
-                    Debug.WriteLine($"CanAccessAddOrder: {CanAccessAddOrder}");
-                    this.RaiseAndSetIfChanged(ref _CanAccessAddOrder, x);
-                    Debug.WriteLine($"CanAccessAddOrder: {CanAccessAddOrder}");
+                    CanAccessOrderList = isAuthenticated;
+                    CanAccessLogout = isAuthenticated;
                 });
+
+            Logout = ReactiveCommand.Create(() =>
+            {
+                _userSession.Logout();
+                Router.Navigate.Execute(new LoginViewModel(this));
+            });
         }
 
         private IObservable<IRoutableViewModel> NavigateWithAuthorization(IRoutableViewModel viewModel)
         {
             if (viewModel is IAuthorizedViewModel authViewModel)
             {
-                if (!authViewModel.RequiredRoles.Any(role => Roles.Contains(role)))
+                if (!_userSession.IsAuthenticated || (authViewModel.RequiredRoles.Any() && !authViewModel.RequiredRoles.Any(role => Roles.Contains(role))))
                 {
                     Debug.WriteLine("Brak uprawnień, przekierowanie na stronę logowania.");
                     return Router.Navigate.Execute(new LoginViewModel(this));

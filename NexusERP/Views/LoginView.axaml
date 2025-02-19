@@ -18,13 +18,13 @@
 		<TextBox VerticalAlignment="Center"
                  FontSize="16"
                  Text="{Binding Username}"
-                 Watermark="E-Mail Address"
+                 Watermark="Adres E-mail"
 				 UseFloatingWatermark="True"/>
 		<TextBox VerticalAlignment="Center"
                  FontSize="16"
 				 PasswordChar="*"
                  Text="{Binding Password}"
-                 Watermark="Password"
+                 Watermark="Hasło"
 				 UseFloatingWatermark="True"/>
 		<Button Command="{Binding LoginCommand}" Content="Zaloguj"/>
 	</StackPanel>

@@ -1,4 +1,5 @@
 ﻿using Avalonia.Platform;
+using NexusERP.Models;
 using NexusERP.Services;
 using ReactiveUI;
 using Splat;
@@ -44,7 +45,7 @@ namespace NexusERP.ViewModels
         }
         private string? _username;
 
-        [Required]
+        [Required(ErrorMessage = "Login jest wymagany")]
         public string? Username 
         {
             get { return _username; }
@@ -53,7 +54,7 @@ namespace NexusERP.ViewModels
 
         private string? _password;
 
-        [Required]
+        [Required(ErrorMessage = "Hasło jest wymagane")]
         public string? Password
         {
             get { return _password; }
@@ -68,9 +69,7 @@ namespace NexusERP.ViewModels
                 var success = await _authService.LoginUser(Username, Password);
                 if (success)
                 {
-                    var mainViewModel = new MainWindowViewModel();
                     Debug.WriteLine("Poprawnie zalogowano");
-                    // Możesz spróbować ręcznie wyzwolić zmiany
                 }
             }
             catch (Exception ex)

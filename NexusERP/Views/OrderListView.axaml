@@ -4,5 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NexusERP.Views.OrderListView">
-    TEST1!
+
+	<ListBox Margin="0,30,0,0">
+		<ListBoxItem>Element 1</ListBoxItem>
+		<ListBoxItem>Element 2</ListBoxItem>
+		<ListBoxItem>Element 3</ListBoxItem>
+	</ListBox>
 </UserControl>

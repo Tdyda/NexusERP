@@ -60,7 +60,7 @@ namespace NexusERP.Services
 
             if (response.IsSuccessStatusCode)
             {
-                var responseData = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                var responseData = await response.Content.ReadFromJsonAsync<LoginResponse>();               
 
                 if (responseData != null)
                 {
@@ -73,12 +73,13 @@ namespace NexusERP.Services
 
                     _userSession.IsAuthenticated = true;
                     _userSession.UserId = responseData.UserId;
+                    _userSession.LocationName = responseData.LocationName;
 
                     var roles = _jwtDecoder.GetRolesFromToken(_authToken);
 
                     foreach (var role in roles)
                     {
-                        _userSession.Roles.Add(role);
+                        _userSession.AddRole(role);
                     }
 
                     _logger.LogInformation($"ID: {_userSession.UserId}");

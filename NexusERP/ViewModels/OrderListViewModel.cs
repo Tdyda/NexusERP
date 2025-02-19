@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media;
+using NexusERP.Interfaces;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace NexusERP.ViewModels
 {
-    public class OrderListViewModel : ViewModelBase, IRoutableViewModel
+    public class OrderListViewModel : ViewModelBase, IAuthorizedViewModel
     {
         public string UrlPathSegment => "orderList";
 
         public IScreen HostScreen { get; }
+
+        public string[] RequiredRoles => [];
 
         public OrderListViewModel(IScreen screen)
         {

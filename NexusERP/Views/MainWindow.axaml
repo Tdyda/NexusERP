@@ -34,12 +34,17 @@
 		<StackPanel>
 			<Menu Grid.Row="1">
 				<MenuItem Header="Dodaj zamówienie"
-				  Command="{Binding ShowAddOrder}"
-				  IsEnabled="{Binding CanAccessAddOrder, Mode=TwoWay}"/>
-				<MenuItem Header="Lista zamówień" Command="{Binding ShowOrderList}" />
+						  Command="{Binding ShowAddOrder}"
+						  IsVisible="{Binding CanAccessAddOrder, Mode=OneWay}"/>
+				
+				<MenuItem Header="Lista zamówień" 
+						  Command="{Binding ShowOrderList}"
+						  IsVisible="{Binding CanAccessOrderList, Mode=OneWay}"/>
+				
+				<MenuItem Header="Wyloguj"
+						  Command="{Binding Logout}"
+						  IsVisible="{Binding CanAccessLogout, Mode=OneWay}"/>
 			</Menu>
-			<Button Content="Launch" Command="{Binding Launch}" />
-
 		</StackPanel>
 	</Grid>
 

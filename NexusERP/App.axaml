@@ -12,4 +12,13 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+
+	<Application.Styles>
+		<Style Selector="Window">
+			<Setter Property="Background" Value="#2D2D2D"/>
+		</Style>
+		<Style Selector="ListBox">
+			<Setter Property="Background" Value="#2D2D2D"/>
+		</Style>
+	</Application.Styles>
 </Application>
