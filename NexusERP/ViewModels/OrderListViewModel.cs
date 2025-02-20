@@ -8,6 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using NexusERP.Enums;
 using System.Windows.Input;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml.Templates;
+using System;
 
 namespace NexusERP.ViewModels
 {
@@ -19,7 +22,6 @@ namespace NexusERP.ViewModels
         private readonly AppDbContext _appDbContext;
         public ObservableCollection<Order> Orders { get; set; } = new();
         public ICommand ChangeStatusCommand { get; }
-
         public OrderListViewModel(IScreen screen)
         {
             HostScreen = screen;
@@ -27,27 +29,32 @@ namespace NexusERP.ViewModels
 
             LoadOrders();
 
-            ChangeStatusCommand = ReactiveCommand.Create<Order>(ChangeStatus);
+            ChangeStatusCommand = ReactiveCommand.Create<Tuple<Order, string>>(ChangeStatus);
         }
 
-        private async void ChangeStatus(Order selectedOrder)
+        private async void ChangeStatus(Tuple<Order, string> param)
         {
-            if (selectedOrder == null)
+            if (param == null)
                 return;
 
-            Debug.WriteLine(selectedOrder);
+            var (selectedOrder, newStatus) = param;
+
+            if (selectedOrder == null)
+                return;
 
             var orders = _appDbContext.Orders.ToList();
 
             foreach(var order in orders)
+            if (order.Index == selectedOrder.Index)
             {
-                if (order != null)
-                {
-                    order.Status = selectedOrder.Status;
-                    _appDbContext.Orders.Update(order);
-                }
-                await _appDbContext.SaveChangesAsync();
+                order.Status = Enum.Parse<OrderStatus>(newStatus);
+                _appDbContext.Orders.Update(order);
+
+                selectedOrder.Status = order.Status;
             }
+
+            await _appDbContext.SaveChangesAsync();
+            LoadOrders();
         }
 
         private void LoadOrders()
@@ -69,6 +76,6 @@ namespace NexusERP.ViewModels
             {
                 Orders.Add(order);
             }
-        }    
+        }
     }
 }

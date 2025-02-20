@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="NexusERP.App"
              xmlns:local="using:NexusERP"
+			 xmlns:conv="using:NexusERP.Converters"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -20,4 +21,9 @@
 			<Setter Property="Background" Value="#2D2D2D"/>			
 		</Style>		
 	</Application.Styles>
+
+	<Application.Resources>
+		<conv:OrderStatusConverter x:Key="OrderStatusConverter"/>
+	</Application.Resources>
+
 </Application>

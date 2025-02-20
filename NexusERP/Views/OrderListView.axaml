@@ -27,9 +27,18 @@
 								<TextBlock Text="{Binding Status}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 								<Border.ContextMenu>
 									<ContextMenu>
-										<MenuItem Header="Status 1"
-                                                  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
-                                                  CommandParameter="{Binding}" />
+										<MenuItem Header="Zakończone"
+												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Done}" />
+
+										<MenuItem Header="Oczekujące"
+												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Pending}" />
+
+										<MenuItem Header="Anulowane"
+												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Canceled}" />
+
 									</ContextMenu>
 								</Border.ContextMenu>
 							</Border>

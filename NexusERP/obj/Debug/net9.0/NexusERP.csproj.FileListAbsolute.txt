@@ -373,3 +373,8 @@ C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Debug\net9.0\Mic
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Tomek\source\repos\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Tomek\source\repos\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Tomek\source\repos\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Tomek\source\repos\NexusERP\NexusERP\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Tomek\source\repos\NexusERP\NexusERP\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
