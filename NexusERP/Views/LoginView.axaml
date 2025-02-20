@@ -26,7 +26,7 @@
                  Text="{Binding Password}"
                  Watermark="Hasło"
 				 UseFloatingWatermark="True"/>
-		<Button Command="{Binding LoginCommand}" Content="Zaloguj"/>
+		<Button Command="{Binding LoginCommand}" Content="Zaloguj" HorizontalAlignment="Center"/>
 	</StackPanel>
     
 </UserControl>

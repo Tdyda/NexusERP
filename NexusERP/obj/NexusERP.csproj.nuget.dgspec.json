@@ -42,9 +42,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -52,27 +52,31 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
+            },
+            "Avalonia.Controls.DataGrid": {
+              "target": "Package",
+              "version": "[11.2.4, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
             },
             "Avalonia.Fonts.Inter": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
             },
             "Avalonia.Themes.Fluent": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
-              "version": "[8.2.1, )"
+              "version": "[8.4.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -112,7 +116,7 @@
             },
             "avalonia.reactiveui": {
               "target": "Package",
-              "version": "[11.2.3, )"
+              "version": "[11.2.4, )"
             },
             "microsoft.entityframeworkcore": {
               "target": "Package",
@@ -151,7 +155,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

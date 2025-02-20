@@ -60,6 +60,7 @@ namespace NexusERP
                 Locator.CurrentMutable.RegisterLazySingleton(() => new UserSession(), typeof(UserSession));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new JwtDecoder(), typeof(JwtDecoder));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
+                Locator.CurrentMutable.RegisterLazySingleton(() => new OrderListViewModel(Locator.Current.GetService<IScreen>()), typeof(OrderListViewModel));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new MainWindow
                 {
                     DataContext = new MainWindowViewModel(),

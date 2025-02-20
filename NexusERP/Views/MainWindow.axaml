@@ -20,19 +20,10 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
-			<rxui:RoutedViewHost.DefaultContent>
-				<TextBlock Text="Default content"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
-			</rxui:RoutedViewHost.DefaultContent>
-			<rxui:RoutedViewHost.ViewLocator>
-				<app:AppViewLocator />
-			</rxui:RoutedViewHost.ViewLocator>
-		</rxui:RoutedViewHost>
-
+		
+		
 		<StackPanel>
-			<Menu Grid.Row="1">
+			<Menu Grid.Row="0">
 				<MenuItem Header="Dodaj zamówienie"
 						  Command="{Binding ShowAddOrder}"
 						  IsVisible="{Binding CanAccessAddOrder, Mode=OneWay}"/>
@@ -45,7 +36,18 @@
 						  Command="{Binding Logout}"
 						  IsVisible="{Binding CanAccessLogout, Mode=OneWay}"/>
 			</Menu>
-		</StackPanel>
+
+			<rxui:RoutedViewHost Grid.Row="1" Router="{Binding Router}">
+				<rxui:RoutedViewHost.DefaultContent>
+					<TextBlock Text="Default content"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center" />
+				</rxui:RoutedViewHost.DefaultContent>
+				<rxui:RoutedViewHost.ViewLocator>
+					<app:AppViewLocator />
+				</rxui:RoutedViewHost.ViewLocator>
+			</rxui:RoutedViewHost>
+		</StackPanel>		
 	</Grid>
 
 </Window>

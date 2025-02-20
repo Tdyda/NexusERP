@@ -2,12 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:NexusERP.ViewModels"
+			 xmlns:sys="clr-namespace:System;assembly=System.Private.CoreLib"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="NexusERP.Views.OrderListView">
+             x:Class="NexusERP.Views.OrderListView"
+			 x:DataType="vm:OrderListViewModel">
 
-	<ListBox Margin="0,30,0,0">
-		<ListBoxItem>Element 1</ListBoxItem>
-		<ListBoxItem>Element 2</ListBoxItem>
-		<ListBoxItem>Element 3</ListBoxItem>
-	</ListBox>
+	<Grid>
+		<DataGrid Margin="20" ItemsSource="{Binding Orders}"
+          AutoGenerateColumns="False" IsReadOnly="True"
+          GridLinesVisibility="All"
+          BorderThickness="1" BorderBrush="Gray">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" />
+				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" />
+				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" />
+				<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" />
+				<DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </UserControl>

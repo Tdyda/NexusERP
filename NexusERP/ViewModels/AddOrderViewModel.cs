@@ -67,7 +67,7 @@ namespace NexusERP.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = string.Empty; // Usuwamy błąd, jeśli wartość jest poprawna
+                    ErrorMessage = string.Empty;
                     _quantity = value;
                 }
 
