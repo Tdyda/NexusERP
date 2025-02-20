@@ -1,20 +1,13 @@
-﻿using Avalonia.Data;
-using Avalonia.Media;
-using NexusERP.Data;
+﻿using NexusERP.Data;
 using NexusERP.Interfaces;
 using NexusERP.Models;
 using ReactiveUI;
 using Splat;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReactiveUI;
-using Avalonia.Controls;
 using NexusERP.Enums;
+using System.Windows.Input;
 
 namespace NexusERP.ViewModels
 {
@@ -24,28 +17,36 @@ namespace NexusERP.ViewModels
         public IScreen HostScreen { get; }
         public string[] RequiredRoles => [];
         private readonly AppDbContext _appDbContext;
-        private string _text;
-
         public ObservableCollection<Order> Orders { get; set; } = new();
-        public string Text
-        {
-            get => _text;
-            set => this.RaiseAndSetIfChanged(ref _text, value);
-        }
+        public ICommand ChangeStatusCommand { get; }
 
         public OrderListViewModel(IScreen screen)
         {
             HostScreen = screen;
             _appDbContext = Locator.Current.GetService<AppDbContext>();
 
-            Text = "test";
-
             LoadOrders();
 
-            Debug.WriteLine($"Orders.Count = {Orders.Count}");
-            foreach (var order in Orders)
+            ChangeStatusCommand = ReactiveCommand.Create<Order>(ChangeStatus);
+        }
+
+        private async void ChangeStatus(Order selectedOrder)
+        {
+            if (selectedOrder == null)
+                return;
+
+            Debug.WriteLine(selectedOrder);
+
+            var orders = _appDbContext.Orders.ToList();
+
+            foreach(var order in orders)
             {
-                Debug.WriteLine($"Order: {order.Index} - {order.Name} - {order.Quantity}");
+                if (order != null)
+                {
+                    order.Status = selectedOrder.Status;
+                    _appDbContext.Orders.Update(order);
+                }
+                await _appDbContext.SaveChangesAsync();
             }
         }
 
@@ -58,7 +59,7 @@ namespace NexusERP.ViewModels
                     Index = g.Key,
                     Name = g.First().Name,
                     Quantity = g.Sum(x => x.Quantity),
-                    OrderDate = DateTimeOffset.Now,
+                    OrderDate = g.Max(x => x.OrderDate),
                     Status = OrderStatus.Pending,
                     ProdLine = g.First().ProdLine
                 }).ToList();
@@ -68,6 +69,6 @@ namespace NexusERP.ViewModels
             {
                 Orders.Add(order);
             }
-        }
+        }    
     }
 }

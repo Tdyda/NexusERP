@@ -1,4 +1,5 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+			 x:Name="OrderListViewControl"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,16 +10,32 @@
 			 x:DataType="vm:OrderListViewModel">
 
 	<Grid>
-		<DataGrid Margin="20" ItemsSource="{Binding Orders}"
-          AutoGenerateColumns="False" IsReadOnly="True"
-          GridLinesVisibility="All"
-          BorderThickness="1" BorderBrush="Gray">
+		<DataGrid Name ="Grid"
+				  ItemsSource="{Binding Orders}"
+				  AutoGenerateColumns="False" IsReadOnly="True"
+				  GridLinesVisibility="All"
+				  BorderThickness="1" BorderBrush="Gray">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" />
-				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" />
-				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" />
-				<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" />
-				<DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+				<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
+				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
+				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
+				<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
+				<DataGridTemplateColumn Header="Status" Width="Auto">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Border Background="Transparent" Padding="5">
+								<TextBlock Text="{Binding Status}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<Border.ContextMenu>
+									<ContextMenu>
+										<MenuItem Header="Status 1"
+                                                  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+                                                  CommandParameter="{Binding}" />
+									</ContextMenu>
+								</Border.ContextMenu>
+							</Border>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>

@@ -21,7 +21,6 @@ namespace NexusERP.ViewModels
         private bool _canAccessOrderList;
         private bool _canAccessAddOrder;
         private bool _canAccessLogout;
-        private OrderListViewModel _orderListViewModel;
         public RoutingState Router { get; } = new RoutingState();
         public ReactiveCommand<Unit, IRoutableViewModel> ShowAddOrder { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ShowOrderList { get; }
@@ -47,7 +46,6 @@ namespace NexusERP.ViewModels
         public MainWindowViewModel()
         {           
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found.");
-            _orderListViewModel = Locator.Current.GetService<OrderListViewModel>() ?? throw new Exception("OrderListViewModel not found");
 
             Router.Navigate.Execute(new LoginViewModel(this));
 
@@ -55,7 +53,7 @@ namespace NexusERP.ViewModels
                 () => NavigateWithAuthorization(new AddOrderViewModel(this)));
 
             ShowOrderList = ReactiveCommand.CreateFromObservable(
-                () => NavigateWithAuthorization(_orderListViewModel));
+                () => NavigateWithAuthorization(new OrderListViewModel(this)));
 
             _userSession.Roles
                  .ObserveCollectionChanges()

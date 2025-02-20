@@ -1,9 +1,9 @@
-using Avalonia.Controls;
+using Avalonia;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using NexusERP.ViewModels;
 using ReactiveUI;
-using System;
+
 
 namespace NexusERP.Views
 {
@@ -12,7 +12,8 @@ namespace NexusERP.Views
         public MainWindow()
         {
             this.WhenActivated(disposables => { });
-            AvaloniaXamlLoader.Load(this);         
+            AvaloniaXamlLoader.Load(this);
+            
         }
     }
 }

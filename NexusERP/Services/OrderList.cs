@@ -29,7 +29,7 @@ namespace NexusERP.Services
                     Index = g.Key,
                     Name = g.First().Name,
                     Quantity = g.Sum(x => x.Quantity),
-                    OrderDate = DateTimeOffset.Now,
+                    OrderDate = DateTime.Now,
                     Status = OrderStatus.Pending,
                     ProdLine = _userSession.LocationName
                 }).ToList();

@@ -1,8 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using Avalonia.Remote.Protocol.Input;
 using NexusERP.ViewModels;
+using ReactiveUI;
 using Splat;
 using System.Diagnostics;
 
@@ -13,7 +16,6 @@ public partial class OrderListView : ReactiveUserControl<OrderListViewModel>
     public OrderListView()
     {
         InitializeComponent();
-        DataContext = Locator.Current.GetService<OrderListViewModel>();
-        Debug.WriteLine($"DataContext: {DataContext?.GetType().Name}");
+        DataContext = new OrderListViewModel(Locator.Current.GetService<IScreen>());
     }
 }

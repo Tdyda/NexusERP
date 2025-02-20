@@ -14,7 +14,7 @@ namespace NexusERP.Models
         public string Name { get; set; }
         public double Quantity { get; set; }
         public string ProdLine { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public OrderStatus Status { get; set; }
     }
 }
