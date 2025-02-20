@@ -42,7 +42,7 @@ namespace NexusERP.ViewModels
             if (selectedOrder == null)
                 return;
 
-            var orders = _appDbContext.Orders.ToList();
+            var orders = _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.Pending).ToList();
 
             foreach(var order in orders)
             if (order.Index == selectedOrder.Index)

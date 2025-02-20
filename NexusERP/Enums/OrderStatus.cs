@@ -10,6 +10,6 @@ namespace NexusERP.Enums
     {
         Pending,
         Done,
-        Cancelled
+        Canceled
     }
 }
