@@ -11,5 +11,6 @@ namespace NexusERP.Models
         public string Index { get; set; }
         public double? Quantity { get; set; }
         public string Name { get; set; }
+        public string? Comment { get; set; }
     }
 }

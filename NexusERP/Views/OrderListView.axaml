@@ -5,12 +5,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:NexusERP.ViewModels"
 			 xmlns:sys="clr-namespace:System;assembly=System.Private.CoreLib"
+			 xmlns:local="clr-namespace:NexusERP.Converters;assembly=NexusERP"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NexusERP.Views.OrderListView"
 			 x:DataType="vm:OrderListViewModel">
 
+	<UserControl.Resources>
+		<local:TimeSpanToDateTimeConverter x:Key="TimeSpanToDateTimeConverter" />
+	</UserControl.Resources>
+	
 	<Grid>
-		<DataGrid Name ="Grid"
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Row="0"
+					Grid.Column="1"
+					Content="Odśwież dane"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Center"
+					Margin="10"
+					Command="{Binding LoadOrdersCommand}"
+					CommandParameter="{Binding SelectedDate, Mode=TwoWay}"/>
+
+			<TimePicker Name="TimePickerControl"
+						Grid.Column="2"
+						Grid.Row="0"
+						ClockIdentifier="24HourClock"
+						MinuteIncrement="15"
+						HorizontalAlignment="Right"
+						Margin="10"
+						SelectedTime="{Binding SelectedDate, Mode=OneWay, Converter={StaticResource TimeSpanToDateTimeConverter}}"/>
+		</Grid>		
+
+		<DataGrid Grid.Row="1"
+				  Name ="Grid"
 				  ItemsSource="{Binding Orders}"
 				  AutoGenerateColumns="False" IsReadOnly="True"
 				  GridLinesVisibility="All"
@@ -20,6 +62,7 @@
 				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
 				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
 				<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
+				<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="*" />
 				<DataGridTemplateColumn Header="Status" Width="Auto">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
@@ -33,7 +76,7 @@
 
 										<MenuItem Header="Oczekujące"
 												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
-												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Pending}" />
+												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Accepted}" />
 
 										<MenuItem Header="Anulowane"
 												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"

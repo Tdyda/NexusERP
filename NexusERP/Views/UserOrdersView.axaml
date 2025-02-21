@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 x:Name="UserOrdersViewControl"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:NexusERP.ViewModels"
+			 xmlns:sys="clr-namespace:System;assembly=System.Private.CoreLib"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NexusERP.Views.UserOrdersView"
+			 x:DataType="vm:UserOrdersViewModel">
+
+	<Grid>
+		<DataGrid Name ="Grid"
+				  ItemsSource="{Binding Orders}"
+				  AutoGenerateColumns="False" IsReadOnly="True"
+				  GridLinesVisibility="All"
+				  BorderThickness="1" BorderBrush="Gray">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
+				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
+				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
+				<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
+				<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="*" />
+				<DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />					
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

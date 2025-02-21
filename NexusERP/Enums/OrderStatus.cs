@@ -8,8 +8,9 @@ namespace NexusERP.Enums
 {
     public enum OrderStatus
     {
-        Pending,
+        Accepted,
         Done,
-        Canceled
+        Canceled,
+        NotAccepted
     }
 }

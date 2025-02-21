@@ -21,9 +21,12 @@ namespace NexusERP.ViewModels
         private bool _canAccessOrderList;
         private bool _canAccessAddOrder;
         private bool _canAccessLogout;
+        private bool _canAccessUserOrders;
+
         public RoutingState Router { get; } = new RoutingState();
         public ReactiveCommand<Unit, IRoutableViewModel> ShowAddOrder { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ShowOrderList { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> ShowUserOrders { get; }
         public ReadOnlyObservableCollection<string> Roles => _userSession.Roles;
         public ICommand Logout { get; }
       
@@ -43,6 +46,12 @@ namespace NexusERP.ViewModels
             get => _canAccessLogout;
             set => this.RaiseAndSetIfChanged(ref _canAccessLogout, value);
         }
+
+        public bool CanAccessUserOrders 
+        {
+            get => _canAccessUserOrders;
+            set => this.RaiseAndSetIfChanged(ref _canAccessUserOrders, value);
+        }
         public MainWindowViewModel()
         {           
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found.");
@@ -55,18 +64,22 @@ namespace NexusERP.ViewModels
             ShowOrderList = ReactiveCommand.CreateFromObservable(
                 () => NavigateWithAuthorization(new OrderListViewModel(this)));
 
+            ShowUserOrders = ReactiveCommand.CreateFromObservable(
+                () => NavigateWithAuthorization(new UserOrdersViewModel(this)));
+
             _userSession.Roles
                  .ObserveCollectionChanges()
                  .Subscribe(_ =>
                  {
-                     CanAccessAddOrder = _userSession.Roles.Contains("admin");
+                     CanAccessAddOrder = _userSession.Roles.Contains("sk") || _userSession.Roles.Contains("admin");
+                     CanAccessOrderList = _userSession.Roles.Contains("mecalux") || _userSession.Roles.Contains("admin");
+                     CanAccessUserOrders = _userSession.Roles.Contains("sk") || _userSession.Roles.Contains("admin");
                  });
 
             _userSession
                 .WhenAnyValue(x => x.IsAuthenticated)
                 .Subscribe(isAuthenticated =>
                 {
-                    CanAccessOrderList = isAuthenticated;
                     CanAccessLogout = isAuthenticated;
                 });
 

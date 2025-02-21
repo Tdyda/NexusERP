@@ -11,6 +11,8 @@ using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Templates;
 using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace NexusERP.ViewModels
 {
@@ -18,18 +20,26 @@ namespace NexusERP.ViewModels
     {
         public string UrlPathSegment => "orderList";
         public IScreen HostScreen { get; }
-        public string[] RequiredRoles => [];
+        public string[] RequiredRoles => ["mecalux", "admin"];
         private readonly AppDbContext _appDbContext;
+        private DateTime _selectedDate;
+
         public ObservableCollection<Order> Orders { get; set; } = new();
         public ICommand ChangeStatusCommand { get; }
+        public ICommand LoadOrdersCommand {  get; }
+        public DateTime SelectedDate
+        {
+            get => _selectedDate;
+            set => this.RaiseAndSetIfChanged(ref _selectedDate, value);
+        }
         public OrderListViewModel(IScreen screen)
         {
             HostScreen = screen;
             _appDbContext = Locator.Current.GetService<AppDbContext>();
 
-            LoadOrders();
-
             ChangeStatusCommand = ReactiveCommand.Create<Tuple<Order, string>>(ChangeStatus);
+            LoadOrdersCommand = ReactiveCommand.Create<DateTime, Task>(
+                (async time => await RefreshOrders(SelectedDate)));
         }
 
         private async void ChangeStatus(Tuple<Order, string> param)
@@ -42,24 +52,36 @@ namespace NexusERP.ViewModels
             if (selectedOrder == null)
                 return;
 
-            var orders = _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.Pending).ToList();
+            selectedOrder.Status = Enum.Parse<OrderStatus>(newStatus);
+            selectedOrder.RaisePropertyChanged(nameof(selectedOrder.Status));
 
-            foreach(var order in orders)
-            if (order.Index == selectedOrder.Index)
+            var index = Orders.IndexOf(selectedOrder);
+            if (index >= 0)
             {
-                order.Status = Enum.Parse<OrderStatus>(newStatus);
-                _appDbContext.Orders.Update(order);
-
-                selectedOrder.Status = order.Status;
+                Orders[index] = selectedOrder;
             }
 
+            var orders = _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.Accepted).ToList();
+
+            foreach (var order in orders)
+                if (order.Index == selectedOrder.Index)
+                {
+                    order.Status = Enum.Parse<OrderStatus>(newStatus);             
+                    _appDbContext.Orders.Update(order);                   
+                }
+
             await _appDbContext.SaveChangesAsync();
-            LoadOrders();
         }
 
-        private void LoadOrders()
+        public async Task RefreshOrders(DateTime time)
         {
-            var orders = _appDbContext.Orders.Where(o => o.Status == Enums.OrderStatus.Pending)
+            await LoadOrders();
+            await ChangeStatusOnLoad(SelectedDate);
+        }
+
+        private async Task LoadOrders()
+        {
+            var orders = await _appDbContext.Orders.Where(o => o.Status == Enums.OrderStatus.Accepted)
                 .GroupBy(x => x.Index)
                 .Select(g => new Order
                 {
@@ -67,14 +89,37 @@ namespace NexusERP.ViewModels
                     Name = g.First().Name,
                     Quantity = g.Sum(x => x.Quantity),
                     OrderDate = g.Max(x => x.OrderDate),
-                    Status = OrderStatus.Pending,
-                    ProdLine = g.First().ProdLine
-                }).ToList();
+                    Status = OrderStatus.Accepted,
+                    ProdLine = g.First().ProdLine,
+                    Comment = g.First().Comment
+                }).ToListAsync();            
 
             Orders.Clear();
             foreach (var order in orders)
             {
                 Orders.Add(order);
+
+                order.WhenAnyValue(o => o.Status)
+                   .Subscribe(status =>
+                   {
+                       var index = Orders.IndexOf(order);
+                       if (index >= 0)
+                       {
+                           Orders[index] = order;
+                       }
+                   });
+            }
+        }
+
+        private async Task ChangeStatusOnLoad(DateTime time)
+        {
+            var orders = await _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.NotAccepted && x.OrderDate <= time).ToListAsync();
+
+            foreach (var order in orders)
+            {
+                order.Status = OrderStatus.Accepted;
+                _appDbContext.Orders.Update(order);
+                _appDbContext.SaveChanges();
             }
         }
     }

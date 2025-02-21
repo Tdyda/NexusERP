@@ -5426,23 +5426,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tomek\\.nuget\\packages\\": {},
+    "C:\\Users\\tdyda\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj",
+      "projectUniqueName": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
       "projectName": "NexusERP",
-      "projectPath": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\NexusERP.csproj",
-      "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tomek\\source\\repos\\NexusERP\\NexusERP\\obj\\",
+      "projectPath": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
+      "packagesPath": "C:\\Users\\tdyda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tdyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5451,7 +5451,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

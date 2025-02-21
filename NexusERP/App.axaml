@@ -15,11 +15,17 @@
     </Application.Styles>
 
 	<Application.Styles>
-		<FluentTheme />
+		<FluentTheme>
+			<FluentTheme.Palettes>
+				<ColorPaletteResources x:Key="Light" Accent="Green" RegionColor="White" ErrorText="Red" />
+				<ColorPaletteResources x:Key="Dark" Accent="White" RegionColor="#2D2D2D" ErrorText="Red" />
+			</FluentTheme.Palettes>
+		</FluentTheme>
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-		<Style Selector="Window">
-			<Setter Property="Background" Value="#2D2D2D"/>			
-		</Style>		
+
+		<Style Selector="DataGridRow:selected">
+			<Setter Property="Foreground" Value="Black" />
+		</Style>
 	</Application.Styles>
 
 	<Application.Resources>

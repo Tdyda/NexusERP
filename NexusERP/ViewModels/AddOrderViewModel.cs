@@ -16,15 +16,17 @@ namespace NexusERP.ViewModels
     {
         public string UrlPathSegment => "addOrder";
         public IScreen HostScreen { get; }
-        public string[] RequiredRoles => ["admin", "user"];
+        public string[] RequiredRoles => ["sk", "admin"];
 
         private string _index;
         private string _name;
         private double? _quantity;
+        private string? _comment;
         private string _errorMessage;
         private AppDbContext _appDbContext;
         private ObservableCollection<FormItem> _formItems;
-        private List<Order> _ordersList;
+        private List<Order> _ordersList;       
+
         public ICommand SubmitCommand { get; }
         public ICommand AddFormItemCommand { get; }
 
@@ -74,6 +76,11 @@ namespace NexusERP.ViewModels
                 this.RaiseAndSetIfChanged(ref _quantity, value);
             }
         }
+        public string? Comment
+        {
+            get => _comment;
+            set => this.RaiseAndSetIfChanged(ref _comment, value);
+        }
 
         public string ErrorMessage
         {
@@ -103,7 +110,8 @@ namespace NexusERP.ViewModels
                     {
                         Index = item.Index,
                         Name = item.Name,
-                        Quantity = (double)item.Quantity
+                        Quantity = (double)item.Quantity,
+                        Comment = item.Comment
                     };
                     _ordersList.Add(order);
                 }

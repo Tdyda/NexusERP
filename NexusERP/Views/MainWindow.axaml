@@ -32,6 +32,10 @@
 						  Command="{Binding ShowOrderList}"
 						  IsVisible="{Binding CanAccessOrderList, Mode=OneWay}"/>
 				
+				<MenuItem Header="Moje zamówienia"
+						  Command="{Binding ShowUserOrders}"
+						  IsVisible="{Binding CanAccessUserOrders, Mode=OneWay}"/>
+				
 				<MenuItem Header="Wyloguj"
 						  Command="{Binding Logout}"
 						  IsVisible="{Binding CanAccessLogout, Mode=OneWay}"/>

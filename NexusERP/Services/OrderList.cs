@@ -30,8 +30,9 @@ namespace NexusERP.Services
                     Name = g.First().Name,
                     Quantity = g.Sum(x => x.Quantity),
                     OrderDate = DateTime.Now,
-                    Status = OrderStatus.Pending,
-                    ProdLine = _userSession.LocationName
+                    Status = OrderStatus.NotAccepted,
+                    ProdLine = _userSession.LocationName,
+                    Comment = g.First().Comment
                 }).ToList();
 
             return finalList;
