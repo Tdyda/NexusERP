@@ -1,18 +1,15 @@
-﻿using NexusERP.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using NexusERP.Data;
+using NexusERP.Enums;
 using NexusERP.Interfaces;
 using NexusERP.Models;
 using ReactiveUI;
 using Splat;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using NexusERP.Enums;
-using System.Windows.Input;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml.Templates;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Windows.Input;
 
 namespace NexusERP.ViewModels
 {
@@ -23,6 +20,7 @@ namespace NexusERP.ViewModels
         public string[] RequiredRoles => ["mecalux", "admin"];
         private readonly AppDbContext _appDbContext;
         private DateTime _selectedDate;
+        private TimeSpan _selectedTime;
 
         public ObservableCollection<Order> Orders { get; set; } = new();
         public ICommand ChangeStatusCommand { get; }
@@ -32,6 +30,12 @@ namespace NexusERP.ViewModels
             get => _selectedDate;
             set => this.RaiseAndSetIfChanged(ref _selectedDate, value);
         }
+
+        public TimeSpan SelectedTime
+        {
+            get => _selectedTime;
+            set => this.RaiseAndSetIfChanged(ref _selectedTime, value);
+        }
         public OrderListViewModel(IScreen screen)
         {
             HostScreen = screen;
@@ -39,7 +43,9 @@ namespace NexusERP.ViewModels
 
             ChangeStatusCommand = ReactiveCommand.Create<Tuple<Order, string>>(ChangeStatus);
             LoadOrdersCommand = ReactiveCommand.Create<DateTime, Task>(
-                (async time => await RefreshOrders(SelectedDate)));
+                (async time => await RefreshOrders()));
+
+            _ = LoadOrders();
         }
 
         private async void ChangeStatus(Tuple<Order, string> param)
@@ -73,10 +79,10 @@ namespace NexusERP.ViewModels
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task RefreshOrders(DateTime time)
+        public async Task RefreshOrders()
         {
+            await ChangeStatusOnLoad(SelectedTime);
             await LoadOrders();
-            await ChangeStatusOnLoad(SelectedDate);
         }
 
         private async Task LoadOrders()
@@ -111,9 +117,11 @@ namespace NexusERP.ViewModels
             }
         }
 
-        private async Task ChangeStatusOnLoad(DateTime time)
+        private async Task ChangeStatusOnLoad(TimeSpan time)
         {
-            var orders = await _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.NotAccepted && x.OrderDate <= time).ToListAsync();
+            var dateTime = DateTime.Today.Add(time);
+
+            var orders = await _appDbContext.Orders.Where(x => x.Status == Enums.OrderStatus.NotAccepted && x.OrderDate <= dateTime).ToListAsync();
 
             foreach (var order in orders)
             {

@@ -48,7 +48,7 @@
 						MinuteIncrement="15"
 						HorizontalAlignment="Right"
 						Margin="10"
-						SelectedTime="{Binding SelectedDate, Mode=OneWay, Converter={StaticResource TimeSpanToDateTimeConverter}}"/>
+						SelectedTime="{Binding SelectedTime}, Mode=OneWay"/>
 		</Grid>		
 
 		<DataGrid Grid.Row="1"
