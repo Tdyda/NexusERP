@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Splat;
+using NexusERP.Enums;
 
 namespace NexusERP.ViewModels
 {
@@ -25,6 +26,7 @@ namespace NexusERP.ViewModels
         private string _errorMessage;
         private AppDbContext _appDbContext;
         private ObservableCollection<FormItem> _formItems;
+        private UserSession? _userSession;
         private List<Order> _ordersList;
         private string _orderBatch;
 
@@ -37,6 +39,7 @@ namespace NexusERP.ViewModels
             SubmitCommand = ReactiveCommand.Create(Submit);
             _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");
             _formItems = new ObservableCollection<FormItem>();
+            _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found");
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
         }
 
@@ -117,6 +120,9 @@ namespace NexusERP.ViewModels
                         Index = item.Index,
                         Name = item.Name,
                         Quantity = (double)item.Quantity,
+                        OrderDate = DateTime.Now,
+                        Status = OrderStatus.NotAccepted,
+                        ProdLine = _userSession.LocationName,
                         Comment = item.Comment,
                         OrderBatch = item.OrderBatch
                     };
@@ -124,10 +130,10 @@ namespace NexusERP.ViewModels
                 }
             }
 
-            var orderList = new OrderList(_ordersList);
-            var finalList = orderList.Calculate();
+            //var orderList = new OrderList(_ordersList);
+            //var finalList = orderList.Calculate();
 
-            foreach (var item in finalList)
+            foreach (var item in _ordersList)
             {
                 await _appDbContext.Orders.AddAsync(item);
             }
