@@ -7,9 +7,9 @@
              x:Class="NexusERP.Views.AddOrderView"
 			 x:DataType="vm:AddOrderViewModel">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+	<ScrollViewer>
 		<StackPanel>
-			<ItemsControl ItemsSource="{Binding FormItems}">
+			<ItemsControl Grid.Row="0" ItemsSource="{Binding FormItems}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="*,*" Margin="10">
@@ -28,10 +28,8 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 
-			<Button Content="Dodaj surowiec" Command="{Binding AddFormItemCommand}" HorizontalAlignment="Center" Margin="10"/>
-			<Button Content="Wyślij" Command="{Binding SubmitCommand}" HorizontalAlignment="Center"/>
+			<Button Grid.Row="1" Content="Dodaj surowiec" Command="{Binding AddFormItemCommand}" HorizontalAlignment="Center" Margin="10"/>
+			<Button Grid.Row="2" Content="Wyślij" Command="{Binding SubmitCommand}" HorizontalAlignment="Center"/>
 		</StackPanel>
 	</ScrollViewer>
-
-
 </UserControl>

@@ -52,5 +52,8 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/OrderListView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/TestView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/tdyda/source/repos/avaloniaTests/NexusERP/NexusERP/Views/UserOrdersView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

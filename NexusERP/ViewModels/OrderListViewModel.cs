@@ -110,7 +110,8 @@ namespace NexusERP.ViewModels
                     OrderDate = g.Max(x => x.OrderDate),
                     Status = OrderStatus.Accepted,
                     ProdLine = g.First().ProdLine,
-                    Comment = g.First().Comment
+                    Comment = g.First().Comment,
+                    HasComment = g.Any(x => !string.IsNullOrEmpty(x.Comment))
                 }).ToListAsync();            
 
             Orders.Clear();

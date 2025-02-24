@@ -9,8 +9,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NexusERP.Views.OrderListView"
 			 x:DataType="vm:OrderListViewModel">
-	
-	<Grid>
+
+	<Grid >
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -44,21 +44,23 @@
 						HorizontalAlignment="Right"
 						Margin="10"
 						SelectedTime="{Binding SelectedTime}, Mode=OneWay"/>
-		</Grid>		
+		</Grid>
 
-		<DataGrid Grid.Row="1"
-				  Name ="Grid"
+		<DataGrid Name="Grid"
+				  Grid.Row="1"
 				  ItemsSource="{Binding Orders}"
 				  AutoGenerateColumns="False" IsReadOnly="True"
 				  GridLinesVisibility="All"
 				  BorderThickness="1" BorderBrush="Gray"
-				  DoubleTapped="OnOrderDoubleTapped">			
-			
+				  DoubleTapped="OnOrderDoubleTapped"
+				  VerticalScrollBarVisibility="Auto"
+				  MinHeight="200">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
 				<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
 				<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
-				<DataGridTemplateColumn Header="Status" Width="Auto" >
+				<DataGridTextColumn Header="Komentarz" Binding="{Binding HasComment}" Width="*" />
+				<DataGridTemplateColumn Header="Status" Width="Auto">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Border Background="Transparent" Padding="5">
@@ -76,7 +78,6 @@
 										<MenuItem Header="Anulowane"
 												  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
 												  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Canceled}" />
-
 									</ContextMenu>
 								</Border.ContextMenu>
 							</Border>
@@ -86,4 +87,5 @@
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>
+
 </UserControl>

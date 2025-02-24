@@ -7,22 +7,23 @@
              x:Class="NexusERP.Views.DetailedOrderView"
 			 x:DataType="vm:DetailedOrderViewModel">
 
-	<DataGrid Grid.Row="1"
-				  Name ="Grid"
-				  ItemsSource="{Binding Orders}"
-				  AutoGenerateColumns="False" IsReadOnly="True"
-				  GridLinesVisibility="All"
-				  BorderThickness="1" BorderBrush="Gray">
-		<DataGrid.Columns>
-			<DataGridTextColumn Header="Order_Batch" Binding="{Binding OrderBatch}" Width="*" />
-			<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
-			<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
-			<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
-			<DataGridTextColumn Header="Lokalizacja" Binding="{Binding ProdLine}" Width="*" />
-			<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
-			<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="*" />
-			<DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />
-				<!--<DataGridTemplateColumn.CellTemplate>
+	<Grid>
+		<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+			<DataGrid	  Name ="Grid"
+						  ItemsSource="{Binding Orders}"
+						  AutoGenerateColumns="False" IsReadOnly="True"
+						  GridLinesVisibility="All"
+						  BorderThickness="1" BorderBrush="Gray">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Order_Batch" Binding="{Binding OrderBatch}" Width="*" />
+					<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
+					<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
+					<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
+					<DataGridTextColumn Header="Lokalizacja" Binding="{Binding ProdLine}" Width="*" />
+					<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
+					<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="*" />
+					<DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />
+					<!--<DataGridTemplateColumn.CellTemplate>
 					<DataTemplate>
 						<Border Background="Transparent" Padding="5">
 							<TextBlock Text="{Binding Status}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -46,6 +47,8 @@
 					</DataTemplate>
 				</DataGridTemplateColumn.CellTemplate>
 			</DataGridTemplateColumn>-->
-		</DataGrid.Columns>
-	</DataGrid>
+				</DataGrid.Columns>
+			</DataGrid>
+		</ScrollViewer>
+	</Grid>
 </UserControl>

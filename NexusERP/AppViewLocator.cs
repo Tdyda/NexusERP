@@ -15,6 +15,7 @@ namespace NexusERP
             Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
             Locator.CurrentMutable.Register(() => new UserOrdersView(), typeof(IViewFor<UserOrdersViewModel>));
             Locator.CurrentMutable.Register(() => new DetailedOrderView(), typeof(IViewFor<DetailedOrderViewModel>));
+            Locator.CurrentMutable.Register(() => new TestView(), typeof(IViewFor<TestViewModel>));
 
         }
         public IViewFor ResolveView<T>(T viewModel, string contract = null) => viewModel switch
@@ -24,6 +25,7 @@ namespace NexusERP
             LoginViewModel context => new LoginView { DataContext = context },
             UserOrdersViewModel context => new UserOrdersView { DataContext = context },
             DetailedOrderViewModel context => new DetailedOrderView { DataContext = context },
+            TestViewModel context => new TestView { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };
     }

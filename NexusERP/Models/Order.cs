@@ -21,6 +21,7 @@ namespace NexusERP.Models
         public DateTime OrderDate { get; set; }
         public string? Comment { get; set; }
         public string OrderBatch { get; set; }
+        public bool HasComment { get; set; }
         public OrderStatus Status
         {
             get => _status;

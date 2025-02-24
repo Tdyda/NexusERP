@@ -130,9 +130,6 @@ namespace NexusERP.ViewModels
                 }
             }
 
-            //var orderList = new OrderList(_ordersList);
-            //var finalList = orderList.Calculate();
-
             foreach (var item in _ordersList)
             {
                 await _appDbContext.Orders.AddAsync(item);

@@ -17,41 +17,41 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		
-		
-		<StackPanel>
-			<Menu Grid.Row="0">
-				<MenuItem Header="Dodaj zamówienie"
-						  Command="{Binding ShowAddOrder}"
-						  IsVisible="{Binding CanAccessAddOrder, Mode=OneWay}"/>
-				
-				<MenuItem Header="Lista zamówień" 
-						  Command="{Binding ShowOrderList}"
-						  IsVisible="{Binding CanAccessOrderList, Mode=OneWay}"/>
-				
-				<MenuItem Header="Moje zamówienia"
-						  Command="{Binding ShowUserOrders}"
-						  IsVisible="{Binding CanAccessUserOrders, Mode=OneWay}"/>
-				
-				<MenuItem Header="Wyloguj"
-						  Command="{Binding Logout}"
-						  IsVisible="{Binding CanAccessLogout, Mode=OneWay}"/>
-			</Menu>
 
-			<rxui:RoutedViewHost Grid.Row="1" Router="{Binding Router}">
-				<rxui:RoutedViewHost.DefaultContent>
-					<TextBlock Text="Default content"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center" />
-				</rxui:RoutedViewHost.DefaultContent>
-				<rxui:RoutedViewHost.ViewLocator>
-					<app:AppViewLocator />
-				</rxui:RoutedViewHost.ViewLocator>
-			</rxui:RoutedViewHost>
-		</StackPanel>		
+		<Menu Grid.Row="0">
+			<MenuItem Header="Dodaj zamówienie"
+                      Command="{Binding ShowAddOrder}"
+                      IsVisible="{Binding CanAccessAddOrder, Mode=OneWay}"/>
+
+			<MenuItem Header="Lista zamówień"
+                      Command="{Binding ShowOrderList}"
+                      IsVisible="{Binding CanAccessOrderList, Mode=OneWay}"/>
+
+			<MenuItem Header="Moje zamówienia"
+                      Command="{Binding ShowUserOrders}"
+                      IsVisible="{Binding CanAccessUserOrders, Mode=OneWay}"/>
+
+			<MenuItem Header="Wyloguj"
+                      Command="{Binding Logout}"
+                      IsVisible="{Binding CanAccessLogout, Mode=OneWay}"/>
+
+			<MenuItem Header="Test"
+                      Command="{Binding Test}" />
+		</Menu>
+
+		<rxui:RoutedViewHost Grid.Row="1" Router="{Binding Router}">
+			<rxui:RoutedViewHost.DefaultContent>
+				<TextBlock Text="Default content"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+			</rxui:RoutedViewHost.DefaultContent>
+			<rxui:RoutedViewHost.ViewLocator>
+				<app:AppViewLocator />
+			</rxui:RoutedViewHost.ViewLocator>
+		</rxui:RoutedViewHost>
+
 	</Grid>
-
 </Window>
