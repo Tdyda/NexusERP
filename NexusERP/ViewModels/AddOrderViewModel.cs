@@ -10,6 +10,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Splat;
 using NexusERP.Enums;
+using System.Linq;
+using NexusERP.Views;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls;
 
 namespace NexusERP.ViewModels
 {
@@ -117,17 +121,52 @@ namespace NexusERP.ViewModels
                 {
                     var order = new Order
                     {
-                        Index = item.Index,
-                        Name = item.Name,
+                        Index = item.Index.ToUpper(),
+                        Name = item.Name.ToUpper(),
                         Quantity = (double)item.Quantity,
                         OrderDate = DateTime.Now,
                         Status = OrderStatus.NotAccepted,
                         ProdLine = _userSession.LocationName,
                         Comment = item.Comment,
-                        OrderBatch = item.OrderBatch
+                        OrderBatch = item.OrderBatch.ToUpper()
                     };
                     _ordersList.Add(order);
                 }
+            }
+
+            var checkOrders = _ordersList
+                .Where(o => o.OrderDate.Date == DateTime.Today)
+                .ToList();
+
+            foreach (var order in _ordersList)
+            {
+                checkOrders.Add(order);
+            }
+
+            var duplicateOrders = checkOrders
+                .GroupBy(o => new { o.Index, o.OrderBatch })
+                .Where(g => g.Count() > 1)
+                .Select(g => new { g.Key.Index, g.Key.OrderBatch, Count = g.Count() })
+                .ToList();
+
+            if (duplicateOrders.Any())
+            {
+                string errorMessage = "Znaleziono duplikaty zamówień dla:\n" +
+                    string.Join("\n", duplicateOrders.Select(d => $"Indeks: {d.Index}, Numer partii: {d.OrderBatch}"));
+
+                // Pobieramy referencję do MainWindow
+                var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+
+                if (mainWindow != null)
+                {
+                    var warningDialog = new WarningDialog(errorMessage);
+                    await warningDialog.ShowDialog(mainWindow);
+
+                    if (!warningDialog.IsConfirmed)
+                    {
+                        return;
+                    }
+                }                
             }
 
             foreach (var item in _ordersList)
@@ -135,6 +174,7 @@ namespace NexusERP.ViewModels
                 await _appDbContext.Orders.AddAsync(item);
             }
             await _appDbContext.SaveChangesAsync();
+            HostScreen.Router.Navigate.Execute(new AddOrderViewModel(HostScreen));
         }
     }
 }

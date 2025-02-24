@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="NexusERP.Views.WarningDialog"
+        Title="WarningDialog"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+
+	<Grid RowDefinitions="*,Auto" Margin="20">
+		<TextBlock x:Name="MessageText"
+				   Grid.Row="0"
+                   Text="Domyślny komunikat"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"/>
+
+		<Grid Grid.Row="1" ColumnDefinitions="*,*" HorizontalAlignment="Center">
+			<Button Grid.Column="0" 
+					Content="OK"
+					HorizontalAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Click="CloseDialog"
+					Margin="10,10,0,0"
+					Width="80"/>
+		
+			<Button Grid.Column="1"
+					Content="Anuluj"
+					HorizontalAlignment="Center"
+					HorizontalContentAlignment="Center"
+					Click="CloseDialog"
+					Margin="10,10,0,0"
+					Width="80"/>
+		</Grid>
+	</Grid>
+
+</Window>
