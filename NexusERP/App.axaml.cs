@@ -66,11 +66,6 @@ namespace NexusERP
                     DataContext = new MainWindowViewModel(),
                 });
 
-                //desktop.MainWindow = new MainWindow
-                //{
-                //    DataContext = new MainWindowViewModel(),
-                //};
-
                 desktop.MainWindow = Locator.Current.GetService<MainWindow>();
             }
 

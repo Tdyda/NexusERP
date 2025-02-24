@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:NexusERP.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NexusERP.Views.DetailedOrderView"
+			 x:DataType="vm:DetailedOrderViewModel">
+
+	<DataGrid Grid.Row="1"
+				  Name ="Grid"
+				  ItemsSource="{Binding Orders}"
+				  AutoGenerateColumns="False" IsReadOnly="True"
+				  GridLinesVisibility="All"
+				  BorderThickness="1" BorderBrush="Gray">
+		<DataGrid.Columns>
+			<DataGridTextColumn Header="Order_Batch" Binding="{Binding OrderBatch}" Width="*" />
+			<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
+			<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
+			<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />
+			<DataGridTextColumn Header="Lokalizacja" Binding="{Binding ProdLine}" Width="*" />
+			<DataGridTextColumn Header="Data" Binding="{Binding OrderDate}" Width="*" />
+			<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment}" Width="*" />
+			<DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />
+				<!--<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<Border Background="Transparent" Padding="5">
+							<TextBlock Text="{Binding Status}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							<Border.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Zakończone"
+											  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+											  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Done}" />
+
+									<MenuItem Header="Oczekujące"
+											  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+											  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Accepted}" />
+
+									<MenuItem Header="Anulowane"
+											  Command="{Binding #Grid.((vm:OrderListViewModel)DataContext).ChangeStatusCommand}"
+											  CommandParameter="{Binding ., Converter={StaticResource OrderStatusConverter}, ConverterParameter=Canceled}" />
+
+								</ContextMenu>
+							</Border.ContextMenu>
+						</Border>
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>-->
+		</DataGrid.Columns>
+	</DataGrid>
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using NexusERP.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using NexusERP.Data;
 using NexusERP.Interfaces;
 using NexusERP.Models;
 using ReactiveUI;
@@ -6,6 +7,7 @@ using Splat;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NexusERP.ViewModels
 {
@@ -25,13 +27,13 @@ namespace NexusERP.ViewModels
             _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found.");
 
-            LoadOrders();
+            _ = LoadOrders();
         }
 
-        public void LoadOrders()
+        public async Task LoadOrders()
         {
             Orders.Clear();
-            var orders = _appDbContext.Orders.Where(x => x.ProdLine == _userSession.LocationName).ToList();
+            var orders = await _appDbContext.Orders.Where(x => x.ProdLine == _userSession.LocationName).ToListAsync();
             foreach (var order in orders)
             {
                 Orders.Add(order);

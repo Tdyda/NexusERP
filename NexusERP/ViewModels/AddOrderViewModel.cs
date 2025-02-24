@@ -25,7 +25,8 @@ namespace NexusERP.ViewModels
         private string _errorMessage;
         private AppDbContext _appDbContext;
         private ObservableCollection<FormItem> _formItems;
-        private List<Order> _ordersList;       
+        private List<Order> _ordersList;
+        private string _orderBatch;
 
         public ICommand SubmitCommand { get; }
         public ICommand AddFormItemCommand { get; }
@@ -81,6 +82,11 @@ namespace NexusERP.ViewModels
             get => _comment;
             set => this.RaiseAndSetIfChanged(ref _comment, value);
         }
+        public string OrderBatch 
+        {
+            get => _orderBatch;
+            set => this.RaiseAndSetIfChanged(ref _orderBatch, value);
+        }
 
         public string ErrorMessage
         {
@@ -111,7 +117,8 @@ namespace NexusERP.ViewModels
                         Index = item.Index,
                         Name = item.Name,
                         Quantity = (double)item.Quantity,
-                        Comment = item.Comment
+                        Comment = item.Comment,
+                        OrderBatch = item.OrderBatch
                     };
                     _ordersList.Add(order);
                 }

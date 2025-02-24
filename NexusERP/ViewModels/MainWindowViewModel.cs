@@ -12,6 +12,7 @@ using System.Windows.Input;
 using DynamicData.Binding;
 using System.Collections.ObjectModel;
 using NexusERP.Interfaces;
+using Avalonia.Controls;
 
 namespace NexusERP.ViewModels
 {

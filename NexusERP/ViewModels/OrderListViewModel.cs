@@ -8,6 +8,8 @@ using Splat;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -25,6 +27,8 @@ namespace NexusERP.ViewModels
         public ObservableCollection<Order> Orders { get; set; } = new();
         public ICommand ChangeStatusCommand { get; }
         public ICommand LoadOrdersCommand {  get; }
+        public ReactiveCommand<Order, Unit> NavigateToDetailedOrderCommand { get; }
+
         public DateTime SelectedDate
         {
             get => _selectedDate;
@@ -46,6 +50,15 @@ namespace NexusERP.ViewModels
                 (async time => await RefreshOrders()));
 
             _ = LoadOrders();
+
+            NavigateToDetailedOrderCommand = ReactiveCommand.CreateFromTask<Order>(async order =>
+            {
+                if (order == null)
+                    return;
+
+                await HostScreen.Router.Navigate.Execute(new DetailedOrderViewModel(HostScreen, order.Index));
+            });
+
         }
 
         private async void ChangeStatus(Tuple<Order, string> param)

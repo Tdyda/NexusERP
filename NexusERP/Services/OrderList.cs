@@ -32,7 +32,8 @@ namespace NexusERP.Services
                     OrderDate = DateTime.Now,
                     Status = OrderStatus.NotAccepted,
                     ProdLine = _userSession.LocationName,
-                    Comment = g.First().Comment
+                    Comment = g.First().Comment,
+                    OrderBatch = g.First().OrderBatch
                 }).ToList();
 
             return finalList;
