@@ -35,7 +35,7 @@ namespace NexusERP.Services
             _logger.LogInformation("RegisterUser called.");
 
             var registerData = new { Username = username, Password = password };
-            var response = await _httpClient.PostAsJsonAsync("http://nexusERP.local/api/account/register", registerData);
+            var response = await _httpClient.PostAsJsonAsync("http://10.172.111.78/api/account/register", registerData);
 
             _logger.LogInformation(response.ToString());
             if (response.IsSuccessStatusCode)
@@ -56,7 +56,7 @@ namespace NexusERP.Services
             _logger.LogInformation($"Zalogowany: {_userSession.IsAuthenticated}");
 
             var loginData = new { Email = username, Password = password };
-            var response = await _httpClient.PostAsJsonAsync("http://nexusERP.local/api/account/login", loginData);
+            var response = await _httpClient.PostAsJsonAsync("http://10.172.111.78/api/account/login", loginData);
 
             if (response.IsSuccessStatusCode)
             {
@@ -110,7 +110,7 @@ namespace NexusERP.Services
                 }
 
                 var refreshData = new { RefreshToken = _refreshToken };
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5003/api/account/refresh-token", refreshData);
+                var response = await _httpClient.PostAsJsonAsync("http://10.172.111.78/api/account/refresh-token", refreshData);
 
                 if (response.IsSuccessStatusCode)
                 {
