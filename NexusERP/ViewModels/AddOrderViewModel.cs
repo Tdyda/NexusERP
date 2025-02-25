@@ -14,6 +14,9 @@ using System.Linq;
 using NexusERP.Views;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.EntityFrameworkCore;
 
 namespace NexusERP.ViewModels
 {
@@ -21,6 +24,9 @@ namespace NexusERP.ViewModels
     {
         public string UrlPathSegment => "addOrder";
         public IScreen HostScreen { get; }
+
+        private PhmDbContext _phmDbContext;
+
         public string[] RequiredRoles => ["sk", "admin"];
 
         private string _index;
@@ -37,14 +43,22 @@ namespace NexusERP.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand AddFormItemCommand { get; }
 
+        private ObservableCollection<string> _avalivableOptions;
+        public ObservableCollection<string> AvalivableOptions
+        {
+            get => _avalivableOptions;
+            set => this.RaiseAndSetIfChanged(ref _avalivableOptions, value);
+        }
         public AddOrderViewModel(IScreen screen)
         {
             HostScreen = screen;
-            SubmitCommand = ReactiveCommand.Create(Submit);
-            _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");
-            _formItems = new ObservableCollection<FormItem>();
+            _phmDbContext = Locator.Current.GetService<PhmDbContext>() ?? throw new Exception("PhmDbContext service not found.");            
+            _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");            
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found");
+            SubmitCommand = ReactiveCommand.Create(Submit);
+            _formItems = new ObservableCollection<FormItem>();
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
+            AvalivableOptions = new ObservableCollection<string>();
         }
 
         public string Index
@@ -106,13 +120,27 @@ namespace NexusERP.ViewModels
             get => _formItems;
             set => this.RaiseAndSetIfChanged(ref _formItems, value);
         }
-        private void AddFormItem()
+        private async void AddFormItem()
         {
-            FormItems.Add(new FormItem());
+            if (AvalivableOptions == null || AvalivableOptions.Count <= 0)
+            {
+                await LoadRawMaterials();
+            }
+            FormItems.Add(new FormItem(AvalivableOptions));
+        }
+
+        private async Task LoadRawMaterials()
+        {
+            var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
+
+            foreach(var material in mtlMaterials)
+            {
+                AvalivableOptions.Add(material.MaterialId);
+            }
         }
 
         private async void Submit()
-        {
+        {            
             _ordersList = new List<Order>();
 
             foreach (var item in FormItems)

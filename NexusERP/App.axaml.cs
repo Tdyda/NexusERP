@@ -55,6 +55,7 @@ namespace NexusERP
                 });
 
                 Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
+                Locator.CurrentMutable.RegisterConstant(new PhmDbContext(), typeof(PhmDbContext));
                 Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));
                 Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(AuthService));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient, loggerFactory.CreateLogger<AuthService>()), typeof(AuthService));

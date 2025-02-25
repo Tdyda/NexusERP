@@ -3,7 +3,8 @@
              x:Class="NexusERP.App"
              xmlns:local="using:NexusERP"
 			 xmlns:conv="using:NexusERP.Converters"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Default"
+			 xmlns:sty="using:FluentAvalonia.Styling">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
@@ -15,6 +16,7 @@
     </Application.Styles>
 
 	<Application.Styles>
+		<sty:FluentAvaloniaTheme />
 		<FluentTheme>
 			<FluentTheme.Palettes>
 				<ColorPaletteResources x:Key="Light" Accent="Green" RegionColor="White" ErrorText="Red" />
