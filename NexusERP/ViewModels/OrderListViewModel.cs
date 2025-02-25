@@ -23,7 +23,6 @@ namespace NexusERP.ViewModels
         private readonly AppDbContext _appDbContext;
         private DateTime _selectedDate;
         private TimeSpan _selectedTime;
-
         public ObservableCollection<Order> Orders { get; set; } = new();
         public ICommand ChangeStatusCommand { get; }
         public ICommand LoadOrdersCommand {  get; }

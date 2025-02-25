@@ -29,7 +29,6 @@ namespace NexusERP.ViewModels
         public ReactiveCommand<Unit, IRoutableViewModel> ShowAddOrder { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ShowOrderList { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> ShowUserOrders { get; }
-        public ReactiveCommand<Unit, IRoutableViewModel> Test { get; set; }
         public ReadOnlyObservableCollection<string> Roles => _userSession.Roles;
         public ICommand Logout { get; }
       
@@ -69,9 +68,6 @@ namespace NexusERP.ViewModels
 
             ShowUserOrders = ReactiveCommand.CreateFromObservable(
                 () => NavigateWithAuthorization(new UserOrdersViewModel(this)));
-
-            Test = ReactiveCommand.CreateFromObservable(
-                () => Router.Navigate.Execute(new TestViewModel(this)));
 
             _userSession.Roles
                  .ObserveCollectionChanges()

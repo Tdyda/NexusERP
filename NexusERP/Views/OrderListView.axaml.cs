@@ -1,16 +1,21 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.ReactiveUI;
 using Avalonia.Remote.Protocol.Input;
+using Avalonia.VisualTree;
 using NexusERP.Models;
 using NexusERP.ViewModels;
 using ReactiveUI;
 using Splat;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace NexusERP.Views;
 

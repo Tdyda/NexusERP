@@ -17,6 +17,7 @@
 					  GridLinesVisibility="All"
 					  BorderThickness="1" BorderBrush="Gray">
 				<DataGrid.Columns>
+					<DataGridTextColumn Header="OrderBatch" Binding="{Binding OrderBatch}" Width="*" />
 					<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" Width="*" />
 					<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*" />
 					<DataGridTextColumn Header="Ilość" Binding="{Binding Quantity}" Width="*" />

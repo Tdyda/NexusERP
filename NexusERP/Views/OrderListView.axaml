@@ -6,6 +6,7 @@
 			 xmlns:vm="using:NexusERP.ViewModels"
 			 xmlns:sys="clr-namespace:System;assembly=System.Private.CoreLib"
 			 xmlns:local="clr-namespace:NexusERP.Converters;assembly=NexusERP"
+			 xmlns:fa="using:FluentAvalonia.UI.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NexusERP.Views.OrderListView"
 			 x:DataType="vm:OrderListViewModel">

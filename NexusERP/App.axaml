@@ -3,6 +3,7 @@
              x:Class="NexusERP.App"
              xmlns:local="using:NexusERP"
 			 xmlns:conv="using:NexusERP.Converters"
+			 xmlns:fa="using:FluentAvalonia.UI.Controls"
              RequestedThemeVariant="Default"
 			 xmlns:sty="using:FluentAvalonia.Styling">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -16,6 +17,7 @@
     </Application.Styles>
 
 	<Application.Styles>
+		
 		<sty:FluentAvaloniaTheme />
 		<FluentTheme>
 			<FluentTheme.Palettes>
@@ -28,10 +30,18 @@
 		<Style Selector="DataGridRow:selected">
 			<Setter Property="Foreground" Value="Black" />
 		</Style>
+
+		<Style Selector="fa|FAComboBox TextBox">
+			<Setter Property="SelectionBrush" Value="#006400"/>
+		</Style>
+
+		<Style Selector="TextBox">
+			<Setter Property="SelectionBrush" Value="#006400"/>
+		</Style>
 	</Application.Styles>
 
 	<Application.Resources>
-		<conv:OrderStatusConverter x:Key="OrderStatusConverter"/>
+		<conv:OrderStatusConverter x:Key="OrderStatusConverter"/>		
 	</Application.Resources>
 
 </Application>

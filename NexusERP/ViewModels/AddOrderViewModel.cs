@@ -30,7 +30,7 @@ namespace NexusERP.ViewModels
         public string[] RequiredRoles => ["sk", "admin"];
 
         private string _index;
-        private string _name;
+        public string _name;
         private double? _quantity;
         private string? _comment;
         private string _errorMessage;
@@ -59,6 +59,8 @@ namespace NexusERP.ViewModels
             _formItems = new ObservableCollection<FormItem>();
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
             AvalivableOptions = new ObservableCollection<string>();
+
+            _ = LoadRawMaterials();
         }
 
         public string Index
@@ -122,10 +124,10 @@ namespace NexusERP.ViewModels
         }
         private async void AddFormItem()
         {
-            if (AvalivableOptions == null || AvalivableOptions.Count <= 0)
-            {
-                await LoadRawMaterials();
-            }
+            //if (AvalivableOptions == null || AvalivableOptions.Count <= 0)
+            //{
+            //    await LoadRawMaterials();
+            //}
             FormItems.Add(new FormItem(AvalivableOptions));
         }
 
@@ -162,7 +164,7 @@ namespace NexusERP.ViewModels
                 }
             }
 
-            var checkOrders = _ordersList
+            var checkOrders = _appDbContext.Orders
                 .Where(o => o.OrderDate.Date == DateTime.Today)
                 .ToList();
 
