@@ -28,5 +28,17 @@ namespace NexusERP.Models
         {
             AvalivableOptions = availableOptions;
         }
+
+        public static bool IsValid(FormItem formItem)
+        {
+            if (string.IsNullOrEmpty(formItem.Index) ||
+                formItem.Quantity <= 0 ||
+                string.IsNullOrEmpty(formItem.Name) ||                
+                string.IsNullOrEmpty(formItem.OrderBatch))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

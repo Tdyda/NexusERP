@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace NexusERP.ViewModels
 {
@@ -25,7 +26,6 @@ namespace NexusERP.ViewModels
     {
         public string UrlPathSegment => "addOrder";
         public IScreen HostScreen { get; }
-
         private PhmDbContext _phmDbContext;
 
         public string[] RequiredRoles => ["sk", "admin"];
@@ -38,6 +38,7 @@ namespace NexusERP.ViewModels
         private AppDbContext _appDbContext;
         private ObservableCollection<FormItem> _formItems;
         private UserSession? _userSession;
+        private ILogger<AddOrderViewModel> _logger;
         private List<Order> _ordersList;
         private string _orderBatch;
 
@@ -53,9 +54,10 @@ namespace NexusERP.ViewModels
         public AddOrderViewModel(IScreen screen)
         {
             HostScreen = screen;
-            _phmDbContext = Locator.Current.GetService<PhmDbContext>() ?? throw new Exception("PhmDbContext service not found.");            
-            _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");            
+            _phmDbContext = Locator.Current.GetService<PhmDbContext>() ?? throw new Exception("PhmDbContext service not found.");
+            _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found");
+            _logger = Locator.Current.GetService<ILogger<AddOrderViewModel>>() ?? throw new Exception("Logger service not found.");
             SubmitCommand = ReactiveCommand.Create(Submit);
             _formItems = new ObservableCollection<FormItem>();
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
@@ -106,7 +108,7 @@ namespace NexusERP.ViewModels
             get => _comment;
             set => this.RaiseAndSetIfChanged(ref _comment, value);
         }
-        public string OrderBatch 
+        public string OrderBatch
         {
             get => _orderBatch;
             set => this.RaiseAndSetIfChanged(ref _orderBatch, value);
@@ -142,9 +144,6 @@ namespace NexusERP.ViewModels
 
             var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
 
-            Debug.WriteLine($"Czas ładowania materiałów: {stopwatch.ElapsedMilliseconds} ms");
-            Debug.WriteLine($"Ilość rekordów: {mtlMaterials1}");
-
             foreach (var material in mtlMaterials)
             {
                 AvalivableOptions.Add(material.MaterialId);
@@ -152,69 +151,93 @@ namespace NexusERP.ViewModels
         }
 
         private async void Submit()
-        {            
+        {
             _ordersList = new List<Order>();
-
-            foreach (var item in FormItems)
+            FormItem? currentItem = null;
+            try
             {
-                if (item.Quantity > 0)
+                foreach (var item in FormItems)
                 {
-                    var order = new Order
+                    currentItem = item;
+                    if (item.Quantity > 0)
                     {
-                        Index = item.Index.ToUpper(),
-                        Name = item.Name.ToUpper(),
-                        Quantity = (double)item.Quantity,
-                        OrderDate = DateTime.Now,
-                        Status = OrderStatus.NotAccepted,
-                        ProdLine = _userSession.LocationName,
-                        Comment = item.Comment,
-                        OrderBatch = item.OrderBatch.ToUpper()
-                    };
-                    _ordersList.Add(order);
+                        var order = new Order
+                        {
+                            Index = item.Index.ToUpper(),
+                            Name = item.Name.ToUpper(),
+                            Quantity = (double)item.Quantity,
+                            OrderDate = DateTime.Now,
+                            Status = OrderStatus.NotAccepted,
+                            ProdLine = _userSession.LocationName,
+                            Comment = item.Comment,
+                            OrderBatch = item.OrderBatch.ToUpper()
+                        };
+                        _ordersList.Add(order);
+                    }
+
                 }
+
+                var checkOrders = _appDbContext.Orders
+                    .Where(o => o.OrderDate.Date == DateTime.Today)
+                    .ToList();
+
+                foreach (var order in _ordersList)
+                {
+                    checkOrders.Add(order);
+                }
+
+                var duplicateOrders = checkOrders
+                    .GroupBy(o => new { o.Index, o.OrderBatch })
+                    .Where(g => g.Count() > 1)
+                    .Select(g => new { g.Key.Index, g.Key.OrderBatch, Count = g.Count() })
+                    .ToList();
+
+                if (duplicateOrders.Any())
+                {
+                    string errorMessage = "Znaleziono duplikaty zamówień dla:\n" +
+                        string.Join("\n", duplicateOrders.Select(d => $"Indeks: {d.Index}, Numer partii: {d.OrderBatch}"));
+
+                    // Pobieramy referencję do MainWindow
+                    var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+
+                    if (mainWindow != null)
+                    {
+                        var warningDialog = new WarningDialog(errorMessage);
+                        await warningDialog.ShowDialog(mainWindow);
+
+                        if (!warningDialog.IsConfirmed)
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                foreach (var item in _ordersList)
+                {
+                    await _appDbContext.Orders.AddAsync(item);
+                }
+                await _appDbContext.SaveChangesAsync();
+                HostScreen.Router.Navigate.Execute(new AddOrderViewModel(HostScreen));
+
             }
-
-            var checkOrders = _appDbContext.Orders
-                .Where(o => o.OrderDate.Date == DateTime.Today)
-                .ToList();
-
-            foreach (var order in _ordersList)
+            catch (Exception ex)
             {
-                checkOrders.Add(order);
-            }
+                string itemInfo = currentItem != null ? $"Indeks: {currentItem.Index}, Nazwa: {currentItem.Name}, OrderBatch: {currentItem.OrderBatch}" : "Brak danych o elemencie";
+                _logger.LogError($"Błąd podczas przetwarzania elementu: {itemInfo}. Exception: {ex.Message}");
 
-            var duplicateOrders = checkOrders
-                .GroupBy(o => new { o.Index, o.OrderBatch })
-                .Where(g => g.Count() > 1)
-                .Select(g => new { g.Key.Index, g.Key.OrderBatch, Count = g.Count() })
-                .ToList();
-
-            if (duplicateOrders.Any())
-            {
-                string errorMessage = "Znaleziono duplikaty zamówień dla:\n" +
-                    string.Join("\n", duplicateOrders.Select(d => $"Indeks: {d.Index}, Numer partii: {d.OrderBatch}"));
-
-                // Pobieramy referencję do MainWindow
                 var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-
                 if (mainWindow != null)
                 {
+                    var errorMessage = "Wystąpił błąd podczas przetwarzania zamówień. Spróbuj ponownie.";
                     var warningDialog = new WarningDialog(errorMessage);
                     await warningDialog.ShowDialog(mainWindow);
 
-                    if (!warningDialog.IsConfirmed)
+                    if (warningDialog.IsConfirmed)
                     {
                         return;
                     }
-                }                
+                }
             }
-
-            foreach (var item in _ordersList)
-            {
-                await _appDbContext.Orders.AddAsync(item);
-            }
-            await _appDbContext.SaveChangesAsync();
-            HostScreen.Router.Navigate.Execute(new AddOrderViewModel(HostScreen));
         }
     }
 }

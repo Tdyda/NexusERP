@@ -57,11 +57,13 @@ namespace NexusERP
                     builder.AddSerilog(logger);
                 });
 
+                Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(ILogger<AuthService>));
+                Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AddOrderViewModel>(), typeof(ILogger<AddOrderViewModel>));
+
                 Locator.CurrentMutable.RegisterConstant(new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));
                 Locator.CurrentMutable.RegisterConstant(new PhmDbContext(), typeof(PhmDbContext));
-                Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));
-                Locator.CurrentMutable.RegisterLazySingleton(() => loggerFactory.CreateLogger<AuthService>(), typeof(AuthService));
-                Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient, loggerFactory.CreateLogger<AuthService>()), typeof(AuthService));
+                Locator.CurrentMutable.RegisterConstant(loggerFactory, typeof(ILoggerFactory));                
+                Locator.CurrentMutable.RegisterLazySingleton(() => new AuthService(httpClient), typeof(AuthService));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new UserSession(), typeof(UserSession));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new JwtDecoder(), typeof(JwtDecoder));
                 Locator.CurrentMutable.RegisterLazySingleton(() => new AppDbContext(optionsBuilder.Options), typeof(AppDbContext));

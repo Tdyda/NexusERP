@@ -34,5 +34,19 @@ namespace NexusERP.Models
                 }
             }
         }
+
+        public static bool IsValid(Order order)
+        {
+            if (string.IsNullOrEmpty(order.Index) ||
+                string.IsNullOrEmpty(order.Name) ||
+                order.Quantity <= 0 ||
+                string.IsNullOrEmpty(order.ProdLine) ||
+                string.IsNullOrEmpty(order.OrderBatch))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

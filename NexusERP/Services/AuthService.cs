@@ -22,10 +22,10 @@ namespace NexusERP.Services
         private UserSession _userSession;
         private readonly JwtDecoder _jwtDecoder;
 
-        public AuthService(HttpClient httpClient, ILogger<AuthService> logger)
+        public AuthService(HttpClient httpClient)
         {
+            _logger = Locator.Current.GetService<ILogger<AuthService>>() ?? throw new Exception("Logger service not found.");
             _httpClient = httpClient;
-            _logger = logger;
             _userSession = Locator.Current.GetService<UserSession>() ?? throw new InvalidOperationException("UserSession service not found.");
             _jwtDecoder = Locator.Current.GetService<JwtDecoder>() ?? throw new InvalidOperationException("JwtDecoder service not found.");
         }
