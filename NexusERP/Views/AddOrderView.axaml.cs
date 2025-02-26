@@ -12,12 +12,14 @@ using NexusERP.Models;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using Avalonia.Threading;
 
 namespace NexusERP.Views;
 
 public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
 {
     private CancellationTokenSource _cts;
+    private static readonly SemaphoreSlim _dbContextSemaphore = new SemaphoreSlim(1, 1);
     private readonly PhmDbContext _phmDbContext = Locator.Current.GetService<PhmDbContext>() ?? throw new Exception("PhmDbContext service not found.");
     public AddOrderView()
     {
@@ -33,25 +35,45 @@ public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
         _cts = new CancellationTokenSource();
         var token = _cts.Token;
 
+
+        if (token.IsCancellationRequested) return;
+
         try
         {
-            await Task.Delay(800, token); // Debounce - czekaj 500ms
+            await _dbContextSemaphore.WaitAsync(token);
+
+            var stopwatch = Stopwatch.StartNew();
+            var order = await _phmDbContext.MtlMaterials
+                .FirstOrDefaultAsync(x => x.MaterialId == comboBox.Text, token);
+            stopwatch.Stop();
+
+            Debug.WriteLine($"Query time: {stopwatch.ElapsedMilliseconds}ms");
+
+            if (order == null)
+            {
+                Debug.WriteLine($"Nie znaleziono materia³u o ID: {comboBox.Text}");
+                return;
+            }
+
+            if (comboBox.DataContext is FormItem formItem)
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    formItem.Name = order.MaterialDesc;
+                });
+            }
         }
         catch (TaskCanceledException)
         {
-            return; // Jeœli anulowane, po prostu zakoñcz funkcjê bez b³êdu
+            // Operacja zosta³a anulowana
         }
-        if (token.IsCancellationRequested) return;
-        var stopwatch = Stopwatch.StartNew();
-        var order = await _phmDbContext.MtlMaterials.FirstOrDefaultAsync(x => x.MaterialId == comboBox.Text);
-        stopwatch.Stop();
-
-        Debug.WriteLine($"Query time: {stopwatch.ElapsedMilliseconds}ms");
-
-        // Pobranie FormItem powi¹zanego z aktualnym ComboBoxem
-        if (comboBox.DataContext is FormItem formItem && order != null)
+        catch (Exception ex)
         {
-            formItem.Name = order.MaterialDesc;
+            Debug.WriteLine($"Wyst¹pi³ b³¹d: {ex.Message}\n{ex.StackTrace}");
+        }
+        finally
+        {
+            _dbContextSemaphore.Release();
         }
     }
 

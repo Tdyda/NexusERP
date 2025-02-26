@@ -1,4 +1,5 @@
-﻿using NexusERP.Data;
+﻿using Avalonia.Threading;
+using NexusERP.Data;
 using ReactiveUI;
 using Splat;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NexusERP.Models
 {
@@ -38,7 +40,17 @@ namespace NexusERP.Models
             set
             {
                 this.RaiseAndSetIfChanged(ref _searchText, value);
-                FilterOptions();
+                _ = FilterOptionsAsync();
+
+                var match = AvalivableOptions.FirstOrDefault(x => x == value);
+                if (match != null)
+                {
+                    Index = match;
+                }
+                else
+                {
+                    Index = value;
+                }
             }
         }
 
@@ -54,14 +66,20 @@ namespace NexusERP.Models
            });
         }
 
-        private void FilterOptions()
+        private async Task FilterOptionsAsync()
         {
-            var filtered = AllOptions.Where(option => option.ToLower().Contains(SearchText.ToLower())).ToList();
-            AvalivableOptions.Clear();
-            foreach (var item in filtered)
+            var filtered = AllOptions
+                .Where(option => option.ToLower().Contains(SearchText.ToLower()))
+                .ToList();
+
+            await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                AvalivableOptions.Add(item);
-            }
+                AvalivableOptions.Clear();
+                foreach (var item in filtered)
+                {
+                    AvalivableOptions.Add(item);
+                }
+            });
         }
 
         public static bool IsValid(FormItem formItem)

@@ -19,10 +19,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using System.Reactive.Linq;
+using System.Reactive.Disposables;
 
 namespace NexusERP.ViewModels
 {
-    public class AddOrderViewModel : ViewModelBase, IAuthorizedViewModel
+    public class AddOrderViewModel : ViewModelBase, IAuthorizedViewModel, IActivatableViewModel
     {
         public string UrlPathSegment => "addOrder";
         public IScreen HostScreen { get; }
@@ -41,9 +43,10 @@ namespace NexusERP.ViewModels
         private ILogger<AddOrderViewModel> _logger;
         private List<Order> _ordersList;
         private string _orderBatch;
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
         public ICommand SubmitCommand { get; }
-        public ICommand DeleteLastFormItemCommand { get; }
+        public ICommand DeleteFormItemCommand { get; }
         public ICommand AddFormItemCommand { get; }
 
         private ObservableCollection<string> _avalivableOptions;
@@ -78,11 +81,17 @@ namespace NexusERP.ViewModels
             SubmitCommand = ReactiveCommand.Create(Submit);
             _formItems = new ObservableCollection<FormItem>();
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
-            DeleteLastFormItemCommand = ReactiveCommand.Create(DeleteLastFormItem);
+            DeleteFormItemCommand = ReactiveCommand.Create<FormItem>(DeleteFormItem);
             AvalivableOptions = new ObservableCollection<string>();
             AllOptions = new ObservableCollection<string>();
 
-            _ = LoadRawMaterials();
+            this.WhenActivated(disposables =>
+            {
+                Observable.FromAsync(() => LoadRawMaterials())
+                          .Subscribe()
+                          .DisposeWith(disposables);
+            });
+            //_ = LoadRawMaterials();
         }
 
         public string Index
@@ -149,12 +158,9 @@ namespace NexusERP.ViewModels
             FormItems.Add(new FormItem(AvalivableOptions, AllOptions));
         }
 
-        private void DeleteLastFormItem()
+        public void DeleteFormItem(FormItem item)
         {
-            if (FormItems.Count > 0)
-            {
-                FormItems.RemoveAt(FormItems.Count - 1);
-            }
+            FormItems.Remove(item);
         }
 
         private async Task LoadRawMaterials()
@@ -179,14 +185,14 @@ namespace NexusERP.ViewModels
 
                     var order = new Order
                     {
-                        Index = item.Index.ToUpper(),
-                        Name = item.Name.ToUpper(),
+                        Index = item.Index.Trim().ToUpper(),
+                        Name = item.Name.Trim().ToUpper(),
                         Quantity = (double)item.Quantity,
                         OrderDate = DateTime.Now,
                         Status = OrderStatus.NotAccepted,
                         ProdLine = _userSession.LocationName,
                         Comment = item.Comment,
-                        OrderBatch = item.OrderBatch.ToUpper()
+                        OrderBatch = item.OrderBatch.Trim().ToUpper()
                     };
                     _ordersList.Add(order);
 

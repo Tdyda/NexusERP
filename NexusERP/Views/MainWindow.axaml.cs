@@ -13,7 +13,7 @@ namespace NexusERP.Views
         {
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
-            //this.AttachDevTools();
+            this.AttachDevTools();
         }
     }
 }
