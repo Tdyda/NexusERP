@@ -33,7 +33,10 @@ namespace NexusERP.ViewModels
         public async Task LoadOrders()
         {
             Orders.Clear();
-            var orders = await _appDbContext.Orders.Where(x => x.ProdLine == _userSession.LocationName && x.OrderDate.Date >= DateTime.Today).ToListAsync();
+            var orders = await _appDbContext.Orders
+                .AsNoTracking()
+                .Where(x => x.ProdLine == _userSession.LocationName && x.OrderDate.Date >= DateTime.Today)
+                .ToListAsync();
             foreach (var order in orders)
             {
                 Orders.Add(order);

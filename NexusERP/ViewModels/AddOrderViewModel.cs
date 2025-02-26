@@ -17,6 +17,7 @@ using Avalonia.Controls;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace NexusERP.ViewModels
 {
@@ -133,9 +134,18 @@ namespace NexusERP.ViewModels
 
         private async Task LoadRawMaterials()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var mtlMaterials1 = await _phmDbContext.MtlMaterials.CountAsync();
+
+            stopwatch.Stop();
+
             var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
 
-            foreach(var material in mtlMaterials)
+            Debug.WriteLine($"Czas ładowania materiałów: {stopwatch.ElapsedMilliseconds} ms");
+            Debug.WriteLine($"Ilość rekordów: {mtlMaterials1}");
+
+            foreach (var material in mtlMaterials)
             {
                 AvalivableOptions.Add(material.MaterialId);
             }

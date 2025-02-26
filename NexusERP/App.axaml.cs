@@ -30,6 +30,10 @@ namespace NexusERP
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var httpClient = new HttpClient();
+            Locator.CurrentMutable.RegisterLazySingleton(() => httpClient, typeof(HttpClient));
+            //UpdateCheckerService.CheckForUpdatesAsync().Wait();
+
             //DisableAvaloniaDataAnnotationValidation();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
@@ -41,7 +45,6 @@ namespace NexusERP
                     new MySqlServerVersion(new Version(10, 11, 6))
                 );
 
-                var httpClient = new HttpClient();
 
                 var logger = new LoggerConfiguration()
                     .MinimumLevel.Debug()

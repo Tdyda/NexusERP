@@ -4,7 +4,7 @@
              xmlns:local="using:NexusERP"
 			 xmlns:conv="using:NexusERP.Converters"
 			 xmlns:fa="using:FluentAvalonia.UI.Controls"
-             RequestedThemeVariant="Default"
+             RequestedThemeVariant="Dark"
 			 xmlns:sty="using:FluentAvalonia.Styling">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JIqeKN9mft0=",
+  "dgSpecHash": "sx2kBMNiTQ0=",
   "success": true,
   "projectFilePath": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
   "expectedPackageFiles": [
@@ -84,6 +84,7 @@
     "C:\\Users\\tdyda\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\tdyda\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\tdyda\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512",
+    "C:\\Users\\tdyda\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\tdyda\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0-preview.2.efcore.9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0-preview.2.efcore.9.0.0.nupkg.sha512",
     "C:\\Users\\tdyda\\.nuget\\packages\\reactiveui\\20.1.63\\reactiveui.20.1.63.nupkg.sha512",
     "C:\\Users\\tdyda\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",
