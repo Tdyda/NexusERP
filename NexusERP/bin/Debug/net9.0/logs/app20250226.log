@@ -1,140 +1,66 @@
-2025-02-26 08:33:54.856 +01:00 [INF] ID: 
-2025-02-26 08:33:54.885 +01:00 [INF] Zalogowany: False
-2025-02-26 08:33:55.180 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 08:33:55.180 +01:00 [INF] Zalogowany: True
-2025-02-26 08:33:55.180 +01:00 [INF] Role: admin
-2025-02-26 08:34:35.400 +01:00 [INF] ID: 
-2025-02-26 08:34:35.400 +01:00 [INF] Zalogowany: False
-2025-02-26 08:34:35.510 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 08:34:35.510 +01:00 [INF] Zalogowany: True
-2025-02-26 08:34:35.510 +01:00 [INF] Role: admin
-2025-02-26 08:34:49.459 +01:00 [INF] ID: 
-2025-02-26 08:34:49.482 +01:00 [INF] Zalogowany: False
-2025-02-26 08:34:49.719 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 08:34:49.719 +01:00 [INF] Zalogowany: True
-2025-02-26 08:34:49.719 +01:00 [INF] Role: admin
-2025-02-26 12:35:10.572 +01:00 [INF] ID: 
-2025-02-26 12:35:10.597 +01:00 [INF] Zalogowany: False
-2025-02-26 12:35:10.860 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 12:35:10.860 +01:00 [INF] Zalogowany: True
-2025-02-26 12:35:10.860 +01:00 [INF] Role: admin
-2025-02-26 12:47:02.330 +01:00 [INF] ID: 
-2025-02-26 12:47:02.353 +01:00 [INF] Zalogowany: False
-2025-02-26 12:47:02.691 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 12:47:02.691 +01:00 [INF] Zalogowany: True
-2025-02-26 12:47:02.691 +01:00 [INF] Role: admin
-2025-02-26 12:49:03.859 +01:00 [INF] ID: 
-2025-02-26 12:49:03.859 +01:00 [INF] Zalogowany: False
-2025-02-26 12:49:03.971 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 12:49:03.971 +01:00 [INF] Zalogowany: True
-2025-02-26 12:49:03.971 +01:00 [INF] Role: admin
-2025-02-26 13:34:24.482 +01:00 [INF] ID: 
-2025-02-26 13:34:24.510 +01:00 [INF] Zalogowany: False
-2025-02-26 13:34:24.792 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:34:24.793 +01:00 [INF] Zalogowany: True
-2025-02-26 13:34:24.793 +01:00 [INF] Role: admin
-2025-02-26 13:35:58.901 +01:00 [INF] ID: 
-2025-02-26 13:35:58.928 +01:00 [INF] Zalogowany: False
-2025-02-26 13:35:59.190 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:35:59.190 +01:00 [INF] Zalogowany: True
-2025-02-26 13:35:59.190 +01:00 [INF] Role: admin
-2025-02-26 13:48:22.262 +01:00 [INF] ID: 
-2025-02-26 13:48:22.288 +01:00 [INF] Zalogowany: False
-2025-02-26 13:48:22.539 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:48:22.540 +01:00 [INF] Zalogowany: True
-2025-02-26 13:48:22.540 +01:00 [INF] Role: admin
-2025-02-26 13:49:46.482 +01:00 [INF] ID: 
-2025-02-26 13:49:46.511 +01:00 [INF] Zalogowany: False
-2025-02-26 13:49:46.745 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:49:46.745 +01:00 [INF] Zalogowany: True
-2025-02-26 13:49:46.745 +01:00 [INF] Role: admin
-2025-02-26 13:50:24.097 +01:00 [INF] ID: 
-2025-02-26 13:50:24.128 +01:00 [INF] Zalogowany: False
-2025-02-26 13:50:24.345 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:50:24.345 +01:00 [INF] Zalogowany: True
-2025-02-26 13:50:24.345 +01:00 [INF] Role: admin
-2025-02-26 13:56:07.304 +01:00 [INF] ID: 
-2025-02-26 13:56:07.331 +01:00 [INF] Zalogowany: False
-2025-02-26 13:56:07.604 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:56:07.604 +01:00 [INF] Zalogowany: True
-2025-02-26 13:56:07.604 +01:00 [INF] Role: admin
-2025-02-26 13:59:15.383 +01:00 [INF] ID: 
-2025-02-26 13:59:15.411 +01:00 [INF] Zalogowany: False
-2025-02-26 13:59:15.671 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 13:59:15.671 +01:00 [INF] Zalogowany: True
-2025-02-26 13:59:15.671 +01:00 [INF] Role: admin
-2025-02-26 14:08:10.527 +01:00 [INF] ID: 
-2025-02-26 14:08:10.556 +01:00 [INF] Zalogowany: False
-2025-02-26 14:08:10.806 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:08:10.806 +01:00 [INF] Zalogowany: True
-2025-02-26 14:08:10.806 +01:00 [INF] Role: admin
-2025-02-26 14:08:45.696 +01:00 [ERR] Error przy tworzeniu zamówienia: Object reference not set to an instance of an object.
-2025-02-26 14:08:46.071 +01:00 [ERR] Error przy tworzeniu zamówienia: NexusERP
-2025-02-26 14:11:49.825 +01:00 [INF] ID: 
-2025-02-26 14:11:49.850 +01:00 [INF] Zalogowany: False
-2025-02-26 14:11:50.074 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:11:50.074 +01:00 [INF] Zalogowany: True
-2025-02-26 14:11:50.074 +01:00 [INF] Role: admin
-2025-02-26 14:11:59.780 +01:00 [ERR] Error przy tworzeniu zamówienia dla item: Index=, Name=, Quantity=, Comment=, OrderBatch=. Exception: 
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at NexusERP.ViewModels.AddOrderViewModel.Submit() in C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\ViewModels\AddOrderViewModel.cs:line 165
-2025-02-26 14:13:09.654 +01:00 [INF] ID: 
-2025-02-26 14:13:09.680 +01:00 [INF] Zalogowany: False
-2025-02-26 14:13:09.976 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:13:09.976 +01:00 [INF] Zalogowany: True
-2025-02-26 14:13:09.976 +01:00 [INF] Role: admin
-2025-02-26 14:13:21.041 +01:00 [ERR] Error przy tworzeniu zamówienia dla item: Index=SCIE-0000-0001, Name=Ciecierzyca BIO, Quantity=2, Comment=, OrderBatch=.
-Exception: 
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at NexusERP.ViewModels.AddOrderViewModel.Submit() in C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\ViewModels\AddOrderViewModel.cs:line 165
-2025-02-26 14:23:50.195 +01:00 [INF] ID: 
-2025-02-26 14:23:50.218 +01:00 [INF] Zalogowany: False
-2025-02-26 14:23:50.468 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:23:50.468 +01:00 [INF] Zalogowany: True
-2025-02-26 14:23:50.468 +01:00 [INF] Role: admin
-2025-02-26 14:24:00.566 +01:00 [ERR] Error przy tworzeniu zamówienia dla item: Index=AANT-0002-0002, Name=Suszone pomidory z ziołami 150/270g pasteryzowane, Quantity=15, Comment=, OrderBatch=.
-Exception: 
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at NexusERP.ViewModels.AddOrderViewModel.Submit() in C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\ViewModels\AddOrderViewModel.cs:line 166
-2025-02-26 14:24:35.472 +01:00 [ERR] Error przy tworzeniu zamówienia dla item: Index=AHUM-0001-0002, Name=, Quantity=15, Comment=, OrderBatch=.
-Exception: 
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at NexusERP.ViewModels.AddOrderViewModel.Submit() in C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\ViewModels\AddOrderViewModel.cs:line 166
-2025-02-26 14:27:57.642 +01:00 [INF] ID: 
-2025-02-26 14:27:57.664 +01:00 [INF] Zalogowany: False
-2025-02-26 14:27:57.909 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:27:57.909 +01:00 [INF] Zalogowany: True
-2025-02-26 14:27:57.909 +01:00 [INF] Role: admin
-2025-02-26 14:28:05.819 +01:00 [ERR] Exception: 
-2025-02-26 14:28:45.082 +01:00 [INF] ID: 
-2025-02-26 14:28:45.114 +01:00 [INF] Zalogowany: False
-2025-02-26 14:28:45.335 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:28:45.335 +01:00 [INF] Zalogowany: True
-2025-02-26 14:28:45.335 +01:00 [INF] Role: admin
-2025-02-26 14:28:55.929 +01:00 [ERR] Object reference not set to an instance of an object.
-2025-02-26 14:33:46.860 +01:00 [INF] ID: 
-2025-02-26 14:33:46.884 +01:00 [INF] Zalogowany: False
-2025-02-26 14:33:47.147 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:33:47.147 +01:00 [INF] Zalogowany: True
-2025-02-26 14:33:47.147 +01:00 [INF] Role: admin
-2025-02-26 14:33:57.223 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Object reference not set to an instance of an object.
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at NexusERP.ViewModels.AddOrderViewModel.Submit() in C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\ViewModels\AddOrderViewModel.cs:line 166
-2025-02-26 14:35:17.893 +01:00 [INF] ID: 
-2025-02-26 14:35:17.915 +01:00 [INF] Zalogowany: False
-2025-02-26 14:35:18.145 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:35:18.145 +01:00 [INF] Zalogowany: True
-2025-02-26 14:35:18.145 +01:00 [INF] Role: admin
-2025-02-26 14:35:26.832 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Object reference not set to an instance of an object.
-2025-02-26 14:37:40.804 +01:00 [INF] ID: 
-2025-02-26 14:37:40.834 +01:00 [INF] Zalogowany: False
-2025-02-26 14:37:41.082 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:37:41.082 +01:00 [INF] Zalogowany: True
-2025-02-26 14:37:41.082 +01:00 [INF] Role: admin
-2025-02-26 14:37:48.615 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Object reference not set to an instance of an object.
-2025-02-26 14:37:55.292 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Object reference not set to an instance of an object.
-2025-02-26 14:38:19.677 +01:00 [INF] ID: 
-2025-02-26 14:38:19.701 +01:00 [INF] Zalogowany: False
-2025-02-26 14:38:19.923 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
-2025-02-26 14:38:19.923 +01:00 [INF] Zalogowany: True
-2025-02-26 14:38:19.923 +01:00 [INF] Role: admin
+2025-02-26 15:01:45.763 +01:00 [INF] ID: 
+2025-02-26 15:01:45.788 +01:00 [INF] Zalogowany: False
+2025-02-26 15:01:46.025 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:01:46.025 +01:00 [INF] Zalogowany: True
+2025-02-26 15:01:46.025 +01:00 [INF] Role: admin
+2025-02-26 15:02:14.596 +01:00 [INF] ID: 
+2025-02-26 15:02:14.624 +01:00 [INF] Zalogowany: False
+2025-02-26 15:02:14.858 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:02:14.858 +01:00 [INF] Zalogowany: True
+2025-02-26 15:02:14.858 +01:00 [INF] Role: admin
+2025-02-26 15:02:48.724 +01:00 [INF] ID: 
+2025-02-26 15:02:48.753 +01:00 [INF] Zalogowany: False
+2025-02-26 15:02:49.053 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:02:49.053 +01:00 [INF] Zalogowany: True
+2025-02-26 15:02:49.053 +01:00 [INF] Role: admin
+2025-02-26 15:03:18.152 +01:00 [INF] ID: 
+2025-02-26 15:03:18.179 +01:00 [INF] Zalogowany: False
+2025-02-26 15:03:18.415 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:03:18.415 +01:00 [INF] Zalogowany: True
+2025-02-26 15:03:18.415 +01:00 [INF] Role: admin
+2025-02-26 15:03:30.771 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: , OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-26 15:03:47.768 +01:00 [INF] ID: 
+2025-02-26 15:03:47.797 +01:00 [INF] Zalogowany: False
+2025-02-26 15:03:48.035 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:03:48.035 +01:00 [INF] Zalogowany: True
+2025-02-26 15:03:48.035 +01:00 [INF] Role: admin
+2025-02-26 15:52:50.259 +01:00 [INF] ID: 
+2025-02-26 15:52:50.284 +01:00 [INF] Zalogowany: False
+2025-02-26 15:52:50.523 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:52:50.523 +01:00 [INF] Zalogowany: True
+2025-02-26 15:52:50.523 +01:00 [INF] Role: admin
+2025-02-26 15:55:19.998 +01:00 [INF] ID: 
+2025-02-26 15:55:20.045 +01:00 [INF] Zalogowany: False
+2025-02-26 15:55:20.322 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:55:20.322 +01:00 [INF] Zalogowany: True
+2025-02-26 15:55:20.322 +01:00 [INF] Role: admin
+2025-02-26 15:59:08.826 +01:00 [INF] ID: 
+2025-02-26 15:59:08.851 +01:00 [INF] Zalogowany: False
+2025-02-26 15:59:09.079 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:59:09.079 +01:00 [INF] Zalogowany: True
+2025-02-26 15:59:09.079 +01:00 [INF] Role: admin
+2025-02-26 15:59:52.277 +01:00 [INF] ID: 
+2025-02-26 15:59:52.304 +01:00 [INF] Zalogowany: False
+2025-02-26 15:59:52.532 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 15:59:52.532 +01:00 [INF] Zalogowany: True
+2025-02-26 15:59:52.532 +01:00 [INF] Role: admin
+2025-02-26 16:02:44.771 +01:00 [INF] ID: 
+2025-02-26 16:02:44.796 +01:00 [INF] Zalogowany: False
+2025-02-26 16:02:45.073 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 16:02:45.073 +01:00 [INF] Zalogowany: True
+2025-02-26 16:02:45.073 +01:00 [INF] Role: admin
+2025-02-26 16:03:00.014 +01:00 [INF] ID: 
+2025-02-26 16:03:00.036 +01:00 [INF] Zalogowany: False
+2025-02-26 16:03:00.348 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 16:03:00.348 +01:00 [INF] Zalogowany: True
+2025-02-26 16:03:00.348 +01:00 [INF] Role: admin
+2025-02-26 16:05:11.672 +01:00 [INF] ID: 
+2025-02-26 16:05:11.702 +01:00 [INF] Zalogowany: False
+2025-02-26 16:05:11.925 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 16:05:11.925 +01:00 [INF] Zalogowany: True
+2025-02-26 16:05:11.925 +01:00 [INF] Role: admin
+2025-02-26 16:09:59.395 +01:00 [INF] ID: 
+2025-02-26 16:09:59.424 +01:00 [INF] Zalogowany: False
+2025-02-26 16:09:59.671 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-26 16:09:59.671 +01:00 [INF] Zalogowany: True
+2025-02-26 16:09:59.671 +01:00 [INF] Role: admin

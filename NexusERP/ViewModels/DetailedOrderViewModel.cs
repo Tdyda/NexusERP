@@ -40,7 +40,10 @@ namespace NexusERP.ViewModels
 
         public async Task LoadDetailedOrders(string index)
         {
-            var orders = await _appDbContext.Orders.Where(x => x.Index == index && x.Status == Enums.OrderStatus.Accepted).ToListAsync();
+            var orders = await _appDbContext.Orders
+                .AsNoTracking()
+                .Where(x => x.Index == index && x.Status == Enums.OrderStatus.Accepted)
+                .ToListAsync();
 
             foreach (var order in orders)
             {

@@ -43,14 +43,31 @@ namespace NexusERP.ViewModels
         private string _orderBatch;
 
         public ICommand SubmitCommand { get; }
+        public ICommand DeleteLastFormItemCommand { get; }
         public ICommand AddFormItemCommand { get; }
 
         private ObservableCollection<string> _avalivableOptions;
+        private ObservableCollection<string> _allOptions;
+        private string _searchText;
+
         public ObservableCollection<string> AvalivableOptions
         {
             get => _avalivableOptions;
             set => this.RaiseAndSetIfChanged(ref _avalivableOptions, value);
         }
+
+        public ObservableCollection<string> AllOptions
+        {
+            get => _allOptions;
+            set => this.RaiseAndSetIfChanged(ref _allOptions, value);
+        }
+
+        public string SearchText 
+        {
+            get => _searchText;
+            set => this.RaiseAndSetIfChanged(ref _searchText, value);
+        }
+
         public AddOrderViewModel(IScreen screen)
         {
             HostScreen = screen;
@@ -61,7 +78,9 @@ namespace NexusERP.ViewModels
             SubmitCommand = ReactiveCommand.Create(Submit);
             _formItems = new ObservableCollection<FormItem>();
             AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
+            DeleteLastFormItemCommand = ReactiveCommand.Create(DeleteLastFormItem);
             AvalivableOptions = new ObservableCollection<string>();
+            AllOptions = new ObservableCollection<string>();
 
             _ = LoadRawMaterials();
         }
@@ -127,29 +146,27 @@ namespace NexusERP.ViewModels
         }
         private async void AddFormItem()
         {
-            //if (AvalivableOptions == null || AvalivableOptions.Count <= 0)
-            //{
-            //    await LoadRawMaterials();
-            //}
-            FormItems.Add(new FormItem(AvalivableOptions));
+            FormItems.Add(new FormItem(AvalivableOptions, AllOptions));
+        }
+
+        private void DeleteLastFormItem()
+        {
+            if (FormItems.Count > 0)
+            {
+                FormItems.RemoveAt(FormItems.Count - 1);
+            }
         }
 
         private async Task LoadRawMaterials()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var mtlMaterials1 = await _phmDbContext.MtlMaterials.CountAsync();
-
-            stopwatch.Stop();
-
             var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
 
             foreach (var material in mtlMaterials)
             {
                 AvalivableOptions.Add(material.MaterialId);
+                AllOptions.Add(material.MaterialId);
             }
-        }
-
+        }       
         private async void Submit()
         {
             _ordersList = new List<Order>();
@@ -159,27 +176,33 @@ namespace NexusERP.ViewModels
                 foreach (var item in FormItems)
                 {
                     currentItem = item;
-                    if (item.Quantity > 0)
+
+                    var order = new Order
                     {
-                        var order = new Order
-                        {
-                            Index = item.Index.ToUpper(),
-                            Name = item.Name.ToUpper(),
-                            Quantity = (double)item.Quantity,
-                            OrderDate = DateTime.Now,
-                            Status = OrderStatus.NotAccepted,
-                            ProdLine = _userSession.LocationName,
-                            Comment = item.Comment,
-                            OrderBatch = item.OrderBatch.ToUpper()
-                        };
-                        _ordersList.Add(order);
-                    }
+                        Index = item.Index.ToUpper(),
+                        Name = item.Name.ToUpper(),
+                        Quantity = (double)item.Quantity,
+                        OrderDate = DateTime.Now,
+                        Status = OrderStatus.NotAccepted,
+                        ProdLine = _userSession.LocationName,
+                        Comment = item.Comment,
+                        OrderBatch = item.OrderBatch.ToUpper()
+                    };
+                    _ordersList.Add(order);
 
                 }
-
                 var checkOrders = _appDbContext.Orders
                     .Where(o => o.OrderDate.Date == DateTime.Today)
+                    .GroupBy(o => new { o.Index, o.OrderBatch })
+                    .Select(g => new Order
+                    {
+                        Index = g.Key.Index,
+                        OrderBatch = g.Key.OrderBatch,
+                        Quantity = g.Sum(o => o.Quantity),
+                        OrderDate = DateTime.Today
+                    })
                     .ToList();
+
 
                 foreach (var order in _ordersList)
                 {

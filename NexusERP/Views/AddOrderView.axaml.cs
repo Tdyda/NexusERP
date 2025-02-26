@@ -35,7 +35,7 @@ public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
 
         try
         {
-            await Task.Delay(600, token); // Debounce - czekaj 500ms
+            await Task.Delay(800, token); // Debounce - czekaj 500ms
         }
         catch (TaskCanceledException)
         {
@@ -55,4 +55,14 @@ public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
         }
     }
 
+
+    private void IndexComboBox_PointerPressed(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var comboBox = sender as FAComboBox;
+        // Wymuszenie otwarcia dropdowna, kiedy kontrolka uzyska fokus
+        if (comboBox != null)
+        {
+            comboBox.IsDropDownOpen = true;
+        }
+    }
 }
