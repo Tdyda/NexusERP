@@ -16,8 +16,17 @@ namespace NexusERP.Models
         private string _name;
         private string _searchText;
         private bool _isDropDownOpen;
+        private string _index;
 
-        public string Index { get; set; }
+        public string Index
+        {
+            get => _index;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _index, value);
+                _ = FilterOptionsAsync();
+            }
+        }
         public double? Quantity { get; set; }
         public string Name
         {
@@ -40,7 +49,7 @@ namespace NexusERP.Models
             set
             {
                 this.RaiseAndSetIfChanged(ref _searchText, value);
-                //_ = FilterOptionsAsync();
+                _ = FilterOptionsAsync();
             }
         }
         public FormItem(ObservableCollection<string> availableOptions, ObservableCollection<string> allOptions)
@@ -58,7 +67,7 @@ namespace NexusERP.Models
         private async Task FilterOptionsAsync()
         {
             var filtered = AllOptions
-                .Where(option => option.ToLower().Contains(SearchText.ToLower()))
+                .Where(option => option.ToLower().Contains(Index.ToLower()))
                 .ToList();
 
             await Dispatcher.UIThread.InvokeAsync(() =>

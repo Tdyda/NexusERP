@@ -23,12 +23,12 @@
 							<fa:FAComboBox x:Name="IndexComboBox"
 										   Grid.Column="0"
 										   Grid.Row="1"
-										   SelectedItem="{Binding Index, Mode=TwoWay}"
 										   ItemsSource="{Binding AvalivableOptions}"
 										   LostFocus="IndexComboBox_LostFocus"
 										   IsEditable="True"
 										   Margin="10 0"
 										   HorizontalAlignment="Stretch"
+										   Text="{Binding Index, Mode=TwoWay}"
 										   PointerPressed="IndexComboBox_PointerPressed"
 										   IsTextSearchEnabled="False"
 										   PlaceholderText="Wpisz i filtruj..."/>
