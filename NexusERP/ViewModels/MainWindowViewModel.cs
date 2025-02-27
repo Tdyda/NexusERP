@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using NexusERP.Interfaces;
 using Avalonia.Controls;
 using NexusERP.Views;
+using NexusERP.Services;
 
 namespace NexusERP.ViewModels
 {
@@ -90,7 +91,7 @@ namespace NexusERP.ViewModels
                 _userSession.Logout();
                 Router.Navigate.Execute(new LoginViewModel(this));
             });
-        }
+        }   
 
         private IObservable<IRoutableViewModel> NavigateWithAuthorization(IRoutableViewModel viewModel)
         {

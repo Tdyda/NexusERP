@@ -33,8 +33,6 @@ namespace NexusERP
             var httpClient = new HttpClient();
             Locator.CurrentMutable.RegisterLazySingleton(() => httpClient, typeof(HttpClient));
 
-            UpdateCheckerService.CheckForUpdatesAsync();
-
             //DisableAvaloniaDataAnnotationValidation();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

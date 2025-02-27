@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Newtonsoft.Json;
 using NexusERP.Models;
+using NexusERP.Views;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -56,8 +59,20 @@ namespace NexusERP.Services
             return 0;
         }
 
-        private static void ShowUpdateDialog(UpdateInfo updateInfo)
+        private static async void ShowUpdateDialog(UpdateInfo updateInfo)
         {
+            var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+
+                var message = "Dostępna jest aktualizacja programu NexusERP. Czy chcesz ją zainstalować?";
+                var warningDialog = new WarningDialog(message);
+
+                await warningDialog.ShowDialog(mainWindow);
+
+                if (!warningDialog.IsConfirmed)
+                {
+                    return;
+                }
+
             try
             {
 
@@ -69,13 +84,25 @@ namespace NexusERP.Services
                     client.DownloadFile(fileUrl, tempFilePath);
                 }
 
-                Process.Start(new ProcessStartInfo
+                Process process = Process.Start(new ProcessStartInfo
                 {
                     FileName = tempFilePath,
-                    UseShellExecute = true,
-                    Verb = "runas", 
-                    WorkingDirectory = Path.GetTempPath()
+                    UseShellExecute = true
                 });
+
+                Environment.Exit(0);
+
+                if (process != null)
+                {
+                    process.WaitForExit();
+                }
+
+                // Po zakończeniu procesu instalacji usuwamy plik
+                if (File.Exists(tempFilePath))
+                {
+                    File.Delete(tempFilePath);
+                    Debug.WriteLine("Plik instalacyjny został usunięty.");
+                }
             }
             catch (Exception ex)
             {

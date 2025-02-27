@@ -21,6 +21,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
+using System.Threading;
 
 namespace NexusERP.ViewModels
 {
@@ -43,6 +44,8 @@ namespace NexusERP.ViewModels
         private ILogger<AddOrderViewModel> _logger;
         private List<Order> _ordersList;
         private string _orderBatch;
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
         public ICommand SubmitCommand { get; }
@@ -163,16 +166,34 @@ namespace NexusERP.ViewModels
             FormItems.Remove(item);
         }
 
+
         private async Task LoadRawMaterials()
         {
-            var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
+            // Czekamy na dostęp do semafora
+            await _semaphore.WaitAsync();
 
-            foreach (var material in mtlMaterials)
+            try
             {
-                AvalivableOptions.Add(material.MaterialId);
-                AllOptions.Add(material.MaterialId);
+                var mtlMaterials = await _phmDbContext.MtlMaterials.ToListAsync();
+
+                foreach (var material in mtlMaterials)
+                {
+                    AvalivableOptions.Add(material.MaterialId);
+                    AllOptions.Add(material.MaterialId);
+                }
             }
-        }       
+            catch (Exception ex)
+            {
+                // Obsługa błędów
+                Debug.WriteLine($"Wystąpił błąd: {ex.Message}");
+            }
+            finally
+            {
+                // Zwalniamy semafor po zakończeniu operacji
+                _semaphore.Release();
+            }
+        }
+
         private async void Submit()
         {
             _ordersList = new List<Order>();

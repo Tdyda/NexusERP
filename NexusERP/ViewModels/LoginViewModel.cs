@@ -66,6 +66,8 @@ namespace NexusERP.ViewModels
         {
             try
             {
+                UpdateCheckerService.CheckForUpdatesAsync();
+
                 var success = await _authService.LoginUser(Username, Password);
                 if (success)
                 {

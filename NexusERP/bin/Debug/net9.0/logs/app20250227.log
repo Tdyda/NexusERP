@@ -112,3 +112,74 @@
 2025-02-27 11:05:04.919 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Nullable object must have a value.
 2025-02-27 11:05:06.682 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Nullable object must have a value.
 2025-02-27 11:05:16.406 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Nullable object must have a value.
+2025-02-27 11:52:54.550 +01:00 [INF] ID: 
+2025-02-27 11:52:54.572 +01:00 [INF] Zalogowany: False
+2025-02-27 11:52:54.742 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:52:54.742 +01:00 [INF] Zalogowany: True
+2025-02-27 11:52:54.742 +01:00 [INF] Role: admin
+2025-02-27 11:52:59.668 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:52:59.668 +01:00 [INF] Zalogowany: True
+2025-02-27 11:52:59.770 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:52:59.770 +01:00 [INF] Zalogowany: True
+2025-02-27 11:52:59.770 +01:00 [INF] Role: admin
+2025-02-27 11:53:24.083 +01:00 [INF] ID: 
+2025-02-27 11:53:24.104 +01:00 [INF] Zalogowany: False
+2025-02-27 11:53:24.276 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:53:24.276 +01:00 [INF] Zalogowany: True
+2025-02-27 11:53:24.276 +01:00 [INF] Role: admin
+2025-02-27 11:54:37.332 +01:00 [INF] ID: 
+2025-02-27 11:54:37.396 +01:00 [INF] Zalogowany: False
+2025-02-27 11:54:37.554 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:54:37.554 +01:00 [INF] Zalogowany: True
+2025-02-27 11:54:37.554 +01:00 [INF] Role: admin
+2025-02-27 11:55:54.975 +01:00 [INF] ID: 
+2025-02-27 11:55:54.997 +01:00 [INF] Zalogowany: False
+2025-02-27 11:55:55.191 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:55:55.191 +01:00 [INF] Zalogowany: True
+2025-02-27 11:55:55.191 +01:00 [INF] Role: admin
+2025-02-27 11:56:04.560 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:56:04.560 +01:00 [INF] Zalogowany: True
+2025-02-27 11:56:04.661 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:56:04.661 +01:00 [INF] Zalogowany: True
+2025-02-27 11:56:04.661 +01:00 [INF] Role: admin
+2025-02-27 11:56:37.714 +01:00 [INF] ID: 
+2025-02-27 11:56:37.736 +01:00 [INF] Zalogowany: False
+2025-02-27 11:56:37.965 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:56:37.965 +01:00 [INF] Zalogowany: True
+2025-02-27 11:56:37.965 +01:00 [INF] Role: admin
+2025-02-27 11:58:40.926 +01:00 [INF] ID: 
+2025-02-27 11:58:40.974 +01:00 [INF] Zalogowany: False
+2025-02-27 11:58:41.136 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:58:41.137 +01:00 [INF] Zalogowany: True
+2025-02-27 11:58:41.137 +01:00 [INF] Role: admin
+2025-02-27 12:09:51.022 +01:00 [INF] ID: 
+2025-02-27 12:09:51.055 +01:00 [INF] Zalogowany: False
+2025-02-27 12:09:51.245 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:09:51.245 +01:00 [INF] Zalogowany: True
+2025-02-27 12:09:51.245 +01:00 [INF] Role: admin
+2025-02-27 12:10:08.703 +01:00 [INF] ID: 
+2025-02-27 12:10:08.733 +01:00 [INF] Zalogowany: False
+2025-02-27 12:10:08.945 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:10:08.945 +01:00 [INF] Zalogowany: True
+2025-02-27 12:10:08.946 +01:00 [INF] Role: admin
+2025-02-27 12:10:34.477 +01:00 [INF] ID: 
+2025-02-27 12:10:34.504 +01:00 [INF] Zalogowany: False
+2025-02-27 12:10:34.797 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:10:34.797 +01:00 [INF] Zalogowany: True
+2025-02-27 12:10:34.797 +01:00 [INF] Role: admin
+2025-02-27 12:11:32.005 +01:00 [INF] ID: 
+2025-02-27 12:11:32.032 +01:00 [INF] Zalogowany: False
+2025-02-27 12:11:32.196 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:11:32.196 +01:00 [INF] Zalogowany: True
+2025-02-27 12:11:32.196 +01:00 [INF] Role: admin
+2025-02-27 12:11:44.331 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: , OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-27 12:56:38.448 +01:00 [INF] ID: 
+2025-02-27 12:56:38.471 +01:00 [INF] Zalogowany: False
+2025-02-27 12:56:38.646 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:56:38.646 +01:00 [INF] Zalogowany: True
+2025-02-27 12:56:38.646 +01:00 [INF] Role: admin
+2025-02-27 12:59:12.238 +01:00 [INF] ID: 
+2025-02-27 12:59:12.262 +01:00 [INF] Zalogowany: False
+2025-02-27 12:59:12.444 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 12:59:12.444 +01:00 [INF] Zalogowany: True
+2025-02-27 12:59:12.444 +01:00 [INF] Role: admin

@@ -17,7 +17,6 @@ public partial class WarningDialog : ReactiveWindow<MainWindowViewModel>
         InitializeComponent();
         MessageText.Text = message;
     }
-
     private void CloseDialog(object? sender, RoutedEventArgs e)
     {
         IsConfirmed = sender is Button button && button.Content.ToString() == "OK";
