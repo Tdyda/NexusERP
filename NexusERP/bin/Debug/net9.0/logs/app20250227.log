@@ -1,0 +1,114 @@
+2025-02-27 07:41:00.056 +01:00 [INF] ID: 
+2025-02-27 07:41:00.090 +01:00 [INF] Zalogowany: False
+2025-02-27 07:41:00.445 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 07:41:00.445 +01:00 [INF] Zalogowany: True
+2025-02-27 07:41:00.445 +01:00 [INF] Role: admin
+2025-02-27 10:19:00.856 +01:00 [INF] ID: 
+2025-02-27 10:19:00.883 +01:00 [INF] Zalogowany: False
+2025-02-27 10:19:01.042 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:19:01.042 +01:00 [INF] Zalogowany: True
+2025-02-27 10:19:01.042 +01:00 [INF] Role: admin
+2025-02-27 10:19:29.519 +01:00 [INF] ID: 
+2025-02-27 10:19:29.544 +01:00 [INF] Zalogowany: False
+2025-02-27 10:19:29.702 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:19:29.702 +01:00 [INF] Zalogowany: True
+2025-02-27 10:19:29.702 +01:00 [INF] Role: admin
+2025-02-27 10:19:51.905 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory z ziołami 150/270g pasteryzowane, OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-27 10:22:37.697 +01:00 [INF] ID: 
+2025-02-27 10:22:37.727 +01:00 [INF] Zalogowany: False
+2025-02-27 10:22:37.887 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:22:37.887 +01:00 [INF] Zalogowany: True
+2025-02-27 10:22:37.887 +01:00 [INF] Role: admin
+2025-02-27 10:23:23.111 +01:00 [INF] ID: 
+2025-02-27 10:23:23.139 +01:00 [INF] Zalogowany: False
+2025-02-27 10:23:23.287 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:23:23.287 +01:00 [INF] Zalogowany: True
+2025-02-27 10:23:23.287 +01:00 [INF] Role: admin
+2025-02-27 10:23:42.062 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-27 10:24:07.226 +01:00 [INF] ID: 
+2025-02-27 10:24:07.283 +01:00 [INF] Zalogowany: False
+2025-02-27 10:24:07.448 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:24:07.448 +01:00 [INF] Zalogowany: True
+2025-02-27 10:24:07.448 +01:00 [INF] Role: admin
+2025-02-27 10:24:55.730 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 20. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:26:52.367 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory z ziołami 150/270g pasteryzowane, OrderBatch: 21. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:27:04.968 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory z ziołami 150/270g pasteryzowane, OrderBatch: 21. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:27:31.163 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory z ziołami 150/270g pasteryzowane, OrderBatch: 21. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:28:18.248 +01:00 [INF] ID: 
+2025-02-27 10:28:18.280 +01:00 [INF] Zalogowany: False
+2025-02-27 10:28:18.443 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:28:18.443 +01:00 [INF] Zalogowany: True
+2025-02-27 10:28:18.443 +01:00 [INF] Role: admin
+2025-02-27 10:28:48.089 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:28:55.681 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: SOLI-0000-0003, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Nullable object must have a value.
+2025-02-27 10:29:05.269 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:29:55.868 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:30:41.322 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Oliwka BIO Kalamata Jumbo b/p, OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:31:52.550 +01:00 [INF] ID: 
+2025-02-27 10:31:52.577 +01:00 [INF] Zalogowany: False
+2025-02-27 10:31:52.741 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:31:52.741 +01:00 [INF] Zalogowany: True
+2025-02-27 10:31:52.741 +01:00 [INF] Role: admin
+2025-02-27 10:32:19.746 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory z ziołami 150/270g pasteryzowane, OrderBatch: 2. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:33:21.034 +01:00 [INF] ID: 
+2025-02-27 10:33:21.067 +01:00 [INF] Zalogowany: False
+2025-02-27 10:33:21.240 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:33:21.240 +01:00 [INF] Zalogowany: True
+2025-02-27 10:33:21.240 +01:00 [INF] Role: admin
+2025-02-27 10:37:04.239 +01:00 [INF] ID: 
+2025-02-27 10:37:04.262 +01:00 [INF] Zalogowany: False
+2025-02-27 10:37:04.431 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:37:04.431 +01:00 [INF] Zalogowany: True
+2025-02-27 10:37:04.431 +01:00 [INF] Role: admin
+2025-02-27 10:37:23.323 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:37:31.965 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Object reference not set to an instance of an object.
+2025-02-27 10:42:32.091 +01:00 [INF] ID: 
+2025-02-27 10:42:32.118 +01:00 [INF] Zalogowany: False
+2025-02-27 10:42:32.298 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:42:32.298 +01:00 [INF] Zalogowany: True
+2025-02-27 10:42:32.298 +01:00 [INF] Role: admin
+2025-02-27 10:44:18.464 +01:00 [INF] ID: 
+2025-02-27 10:44:18.489 +01:00 [INF] Zalogowany: False
+2025-02-27 10:44:18.646 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:44:18.646 +01:00 [INF] Zalogowany: True
+2025-02-27 10:44:18.646 +01:00 [INF] Role: admin
+2025-02-27 10:45:04.608 +01:00 [INF] ID: 
+2025-02-27 10:45:04.636 +01:00 [INF] Zalogowany: False
+2025-02-27 10:45:04.838 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:45:04.838 +01:00 [INF] Zalogowany: True
+2025-02-27 10:45:04.838 +01:00 [INF] Role: admin
+2025-02-27 10:46:43.375 +01:00 [INF] ID: 
+2025-02-27 10:46:43.402 +01:00 [INF] Zalogowany: False
+2025-02-27 10:46:43.575 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:46:43.576 +01:00 [INF] Zalogowany: True
+2025-02-27 10:46:43.576 +01:00 [INF] Role: admin
+2025-02-27 10:48:15.793 +01:00 [INF] ID: 
+2025-02-27 10:48:15.814 +01:00 [INF] Zalogowany: False
+2025-02-27 10:48:15.970 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 10:48:15.970 +01:00 [INF] Zalogowany: True
+2025-02-27 10:48:15.970 +01:00 [INF] Role: admin
+2025-02-27 11:00:56.224 +01:00 [INF] ID: 
+2025-02-27 11:00:56.259 +01:00 [INF] Zalogowany: False
+2025-02-27 11:00:56.417 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:00:56.417 +01:00 [INF] Zalogowany: True
+2025-02-27 11:00:56.417 +01:00 [INF] Role: admin
+2025-02-27 11:02:37.073 +01:00 [INF] ID: 
+2025-02-27 11:02:37.097 +01:00 [INF] Zalogowany: False
+2025-02-27 11:02:37.251 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:02:37.251 +01:00 [INF] Zalogowany: True
+2025-02-27 11:02:37.251 +01:00 [INF] Role: admin
+2025-02-27 11:02:53.964 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: , Nazwa: , OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-27 11:04:15.403 +01:00 [INF] ID: 
+2025-02-27 11:04:15.437 +01:00 [INF] Zalogowany: False
+2025-02-27 11:04:15.622 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:04:15.622 +01:00 [INF] Zalogowany: True
+2025-02-27 11:04:15.622 +01:00 [INF] Role: admin
+2025-02-27 11:04:45.269 +01:00 [INF] ID: 
+2025-02-27 11:04:45.301 +01:00 [INF] Zalogowany: False
+2025-02-27 11:04:45.460 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-02-27 11:04:45.460 +01:00 [INF] Zalogowany: True
+2025-02-27 11:04:45.460 +01:00 [INF] Role: admin
+2025-02-27 11:05:01.022 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: , OrderBatch: . Exception: Object reference not set to an instance of an object.
+2025-02-27 11:05:04.919 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Nullable object must have a value.
+2025-02-27 11:05:06.682 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: . Exception: Nullable object must have a value.
+2025-02-27 11:05:16.406 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: AANT-0002-0001, Nazwa: Suszone pomidory wypełnione serkiem 270g pasteryzowane , OrderBatch: 1. Exception: Nullable object must have a value.

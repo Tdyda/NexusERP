@@ -4,7 +4,9 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
@@ -16,13 +18,14 @@ namespace NexusERP.Services
     public class UpdateCheckerService
     {
         private static readonly HttpClient _httpClient = Locator.Current.GetService<HttpClient>() ?? throw new InvalidOperationException("HttpClient service not found.");
-        private const string UpdateUrl = "https://api.github.com/repos/tdyda/NexusERP/releases/latest";
+        private const string UpdateUrl = "http://10.172.111.78/NexusERP_latest.json";
 
-        public static async Task CheckForUpdatesAsync()
+        public static void CheckForUpdatesAsync()
         {
             try
             {
-                var response = await _httpClient.GetStringAsync(UpdateUrl);
+                _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("NexusERP-Updater/1.0");
+                var response = _httpClient.GetStringAsync(UpdateUrl).Result;
                 var updateInfo = JsonConvert.DeserializeObject<UpdateInfo>(response);
 
                 var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -55,7 +58,29 @@ namespace NexusERP.Services
 
         private static void ShowUpdateDialog(UpdateInfo updateInfo)
         {
-            System.Diagnostics.Process.Start(updateInfo.Url);
+            try
+            {
+
+                string fileUrl = updateInfo.Url;
+                string tempFilePath = Path.Combine(Path.GetTempPath(), "NexusERP_install.exe");
+
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(fileUrl, tempFilePath);
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempFilePath,
+                    UseShellExecute = true,
+                    Verb = "runas", 
+                    WorkingDirectory = Path.GetTempPath()
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd podczas uruchamiania instalatora: {ex.Message}");
+            }
         }
     }
 }

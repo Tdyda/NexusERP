@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace NexusERP.Models
 {
@@ -20,7 +19,8 @@ namespace NexusERP.Models
 
         public string Index { get; set; }
         public double? Quantity { get; set; }
-        public string Name {
+        public string Name
+        {
             get => _name;
             set => this.RaiseAndSetIfChanged(ref _name, value);
         }
@@ -35,25 +35,14 @@ namespace NexusERP.Models
         }
 
         public string SearchText
-        { 
+        {
             get => _searchText;
             set
             {
                 this.RaiseAndSetIfChanged(ref _searchText, value);
-                _ = FilterOptionsAsync();
-
-                var match = AvalivableOptions.FirstOrDefault(x => x == value);
-                if (match != null)
-                {
-                    Index = match;
-                }
-                else
-                {
-                    Index = value;
-                }
+                //_ = FilterOptionsAsync();
             }
         }
-
         public FormItem(ObservableCollection<string> availableOptions, ObservableCollection<string> allOptions)
         {
             AvalivableOptions = availableOptions;
@@ -80,13 +69,14 @@ namespace NexusERP.Models
                     AvalivableOptions.Add(item);
                 }
             });
-        }
+        }           
+
 
         public static bool IsValid(FormItem formItem)
         {
             if (string.IsNullOrEmpty(formItem.Index) ||
                 formItem.Quantity <= 0 ||
-                string.IsNullOrEmpty(formItem.Name) ||                
+                string.IsNullOrEmpty(formItem.Name) ||
                 string.IsNullOrEmpty(formItem.OrderBatch))
             {
                 return false;

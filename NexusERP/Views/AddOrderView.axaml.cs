@@ -35,12 +35,15 @@ public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
         _cts = new CancellationTokenSource();
         var token = _cts.Token;
 
-
         if (token.IsCancellationRequested) return;
+
+        bool semaphoreAcquired = false;
 
         try
         {
+            // Staramy siê "zaj¹æ" semafor
             await _dbContextSemaphore.WaitAsync(token);
+            semaphoreAcquired = true;
 
             var stopwatch = Stopwatch.StartNew();
             var order = await _phmDbContext.MtlMaterials
@@ -73,9 +76,14 @@ public partial class AddOrderView : ReactiveUserControl<AddOrderViewModel>
         }
         finally
         {
-            _dbContextSemaphore.Release();
+            // Zwalniamy semafor tylko wtedy, gdy zosta³ zajêty
+            if (semaphoreAcquired)
+            {
+                _dbContextSemaphore.Release();
+            }
         }
     }
+
 
 
     private void IndexComboBox_PointerPressed(object sender, Avalonia.Interactivity.RoutedEventArgs e)

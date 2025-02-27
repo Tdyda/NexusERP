@@ -28,11 +28,12 @@ namespace NexusERP
             AvaloniaXamlLoader.Load(this);
         }
 
-        public override void OnFrameworkInitializationCompleted()
+        public override async void OnFrameworkInitializationCompleted()
         {
             var httpClient = new HttpClient();
             Locator.CurrentMutable.RegisterLazySingleton(() => httpClient, typeof(HttpClient));
-            //UpdateCheckerService.CheckForUpdatesAsync().Wait();
+
+            UpdateCheckerService.CheckForUpdatesAsync();
 
             //DisableAvaloniaDataAnnotationValidation();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

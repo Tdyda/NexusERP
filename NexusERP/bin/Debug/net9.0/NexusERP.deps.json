@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "NexusERP/1.0.0": {
+      "NexusERP/0.0.1": {
         "dependencies": {
           "Avalonia": "11.2.4",
           "Avalonia.Controls.DataGrid": "11.2.4",
@@ -1684,7 +1684,7 @@
     }
   },
   "libraries": {
-    "NexusERP/1.0.0": {
+    "NexusERP/0.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
