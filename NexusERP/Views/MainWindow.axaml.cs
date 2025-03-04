@@ -13,9 +13,9 @@ namespace NexusERP.Views
         public MainWindow()
         {
             this.WhenActivated(disposables => { });
-            AvaloniaXamlLoader.Load(this);            
+            AvaloniaXamlLoader.Load(this);
 
-            //this.AttachDevTools();
+            this.AttachDevTools();
         }
     }
 }

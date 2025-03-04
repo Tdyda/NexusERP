@@ -4,24 +4,24 @@
              xmlns:local="using:NexusERP"
 			 xmlns:conv="using:NexusERP.Converters"
 			 xmlns:fa="using:FluentAvalonia.UI.Controls"
-             RequestedThemeVariant="Dark"
+             RequestedThemeVariant="Light"
 			 xmlns:sty="using:FluentAvalonia.Styling">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-  
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+	<Application.DataTemplates>
+		<local:ViewLocator/>
+	</Application.DataTemplates>
 
 	<Application.Styles>
-		
+		<FluentTheme />
+	</Application.Styles>
+
+	<Application.Styles>
+
 		<sty:FluentAvaloniaTheme />
 		<FluentTheme>
 			<FluentTheme.Palettes>
-				<ColorPaletteResources x:Key="Light" Accent="Green" RegionColor="White" ErrorText="Red" />
+				<ColorPaletteResources x:Key="Light" Accent="#70ADFF" RegionColor="White" ErrorText="Red" />
 				<ColorPaletteResources x:Key="Dark" Accent="White" RegionColor="#2D2D2D" ErrorText="Red" />
 			</FluentTheme.Palettes>
 		</FluentTheme>
@@ -37,11 +37,17 @@
 
 		<Style Selector="TextBox">
 			<Setter Property="SelectionBrush" Value="#006400"/>
+			<Setter Property="CornerRadius" Value="0" />
+		</Style>
+
+		<Style Selector="TextBox:empty">
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="Foreground" Value="Gray"/>
 		</Style>
 	</Application.Styles>
 
 	<Application.Resources>
-		<conv:OrderStatusConverter x:Key="OrderStatusConverter"/>		
+		<conv:OrderStatusConverter x:Key="OrderStatusConverter"/>
 	</Application.Resources>
 
 </Application>

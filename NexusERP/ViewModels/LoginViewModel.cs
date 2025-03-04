@@ -1,6 +1,8 @@
-﻿using Avalonia.Platform;
+﻿using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform;
 using NexusERP.Models;
 using NexusERP.Services;
+using NexusERP.Views;
 using ReactiveUI;
 using Splat;
 using System;
@@ -45,7 +47,7 @@ namespace NexusERP.ViewModels
         }
         private string? _username;
 
-        [Required(ErrorMessage = "Login jest wymagany")]
+        //[Required(ErrorMessage = "Login jest wymagany")]
         public string? Username 
         {
             get { return _username; }
@@ -54,7 +56,7 @@ namespace NexusERP.ViewModels
 
         private string? _password;
 
-        [Required(ErrorMessage = "Hasło jest wymagane")]
+        //[Required(ErrorMessage = "Hasło jest wymagane")]
         public string? Password
         {
             get { return _password; }
@@ -73,10 +75,36 @@ namespace NexusERP.ViewModels
                 {
                     Debug.WriteLine("Poprawnie zalogowano");
                 }
+                else
+                {
+                    var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                    if (mainWindow != null)
+                    {
+                        var errorMessage = "Niepoprawny login lub hasło";
+                        var warningDialog = new WarningDialog(errorMessage);
+                        await warningDialog.ShowDialog(mainWindow);
+
+                        if (warningDialog.IsConfirmed)
+                        {
+                            return;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                //ErrorMessage = $"Wystąpił błąd: {ex.Message}";
+                var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                if (mainWindow != null)
+                {
+                    var errorMessage = "Problem z połączeniem z usługą UserProvider";
+                    var warningDialog = new WarningDialog(errorMessage);
+                    await warningDialog.ShowDialog(mainWindow);
+
+                    if (warningDialog.IsConfirmed)
+                    {
+                        return;
+                    }
+                }
             }
         }
     }

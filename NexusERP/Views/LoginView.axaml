@@ -8,25 +8,91 @@
 			 x:CompileBindings="True"
 			 x:DataType="vm:LoginViewModel">
 
-	<StackPanel VerticalAlignment="Center" Spacing="5" MaxWidth="350">
-		<TextBlock VerticalAlignment="Center"
-                   FontSize="16"
-                   FontWeight="SemiBold"
-                   Text="Enter your Credentials"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap" />
-		<TextBox VerticalAlignment="Center"
-                 FontSize="16"
-                 Text="{Binding Username}"
-                 Watermark="Adres E-mail"
-				 UseFloatingWatermark="True"/>
-		<TextBox VerticalAlignment="Center"
-                 FontSize="16"
-				 PasswordChar="*"
-                 Text="{Binding Password}"
-                 Watermark="Hasło"
-				 UseFloatingWatermark="True"/>
-		<Button Command="{Binding LoginCommand}" Content="Zaloguj" HorizontalAlignment="Center"/>
-	</StackPanel>
-    
+	<Border MinHeight="100" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="0,0,0,3">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Row="1" Margin="50, 0, 0, 10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50"/>
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<Label Content="Login: "
+					   Grid.Row="0"
+					   Grid.Column="0"
+					   VerticalAlignment="Bottom" />
+
+				<TextBox Grid.Column="1"
+						 Grid.Row="0"
+						 Width="200"
+						 VerticalAlignment="Center"
+						 FontSize="16"
+						 Text="{Binding Username}"
+						 Watermark="Wprowadź id użytkownika"
+						 UseFloatingWatermark="False"/>
+
+				<Label Content="Hasło: "
+					   Grid.Column="0"
+					   Grid.Row="1"
+					   VerticalAlignment="Bottom"/>
+
+				<TextBox Grid.Column="1"
+						 Grid.Row="1"
+						 Width="200"
+						 VerticalAlignment="Center"
+						 FontSize="16"
+						 PasswordChar="*"
+						 Text="{Binding Password}"
+						 Watermark="Wprowadź hasło użytkownika"
+						 UseFloatingWatermark="False" />
+
+				<Button Grid.Row="2"
+						Grid.ColumnSpan="2"
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Center"
+						Command="{Binding LoginCommand}"
+						Content="Zaloguj"
+						Background="White"
+						BorderBrush="Black"
+						BorderThickness="1"
+						CornerRadius="0">
+					<Button.Styles>
+						<Style Selector="Button">
+							<Setter Property="Background" Value="White" />
+							<Setter Property="BorderBrush" Value="Black" />
+							<Setter Property="BorderThickness" Value="1" />
+							<Setter Property="Foreground" Value="Black" />
+						</Style>
+						<Style Selector="Button:pointerover /template/ ContentPresenter">
+							<Setter Property="Background" Value="#B0D5F5" />
+							<Setter Property="BorderBrush" Value="Black" />
+							<Setter Property="BorderThickness" Value="1" />
+						</Style>
+						<Style Selector="Button:pressed /template/ ContentPresenter">
+							<Setter Property="Background" Value="#9FC6E6" />
+							<Setter Property="BorderBrush" Value="Black" />
+							<Setter Property="BorderThickness" Value="1" />
+						</Style>
+					</Button.Styles>
+				</Button>
+			</Grid>
+		</Grid>
+	</Border>
+
 </UserControl>
