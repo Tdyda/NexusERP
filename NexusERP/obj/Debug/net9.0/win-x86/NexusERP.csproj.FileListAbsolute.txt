@@ -375,6 +375,3 @@ C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\NexusERP.csproj.Up2Date
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\NexusERP.genruntimeconfig.cache
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\ref\NexusERP.dll
-C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\NexusERP.dll
-C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\refint\NexusERP.dll
-C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Debug\net9.0\win-x86\NexusERP.pdb

@@ -38,7 +38,7 @@ namespace NexusERP
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-                // Skonfiguruj po³¹czenie do bazy danych tutaj
+                // Skonfiguruj poÅ‚Ä…czenie do bazy danych tutaj
                 optionsBuilder.UseMySql(
                     "Server=10.172.111.78;Database=order_warehouse_db;User=tdyda;Password=Online1234!;",
                     new MySqlServerVersion(new Version(10, 11, 6))

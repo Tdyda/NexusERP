@@ -44,6 +44,25 @@
 			<Setter Property="FontStyle" Value="Italic"/>
 			<Setter Property="Foreground" Value="Gray"/>
 		</Style>
+
+		<!--<Style Selector="TimePicker ListBoxItem">
+			<Setter Property="Background" Value="Yellow" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="Padding" Value="10" />
+		</Style>
+
+		<Style Selector="TimePicker ListBoxItem:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="Blue" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="Padding" Value="10" />
+		</Style>
+
+		<Style Selector="TimePicker ListBoxItem:selected /template/ ContentPresenter">
+			<Setter Property="Background" Value="Black"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>-->
+
+
 	</Application.Styles>
 
 	<Application.Resources>

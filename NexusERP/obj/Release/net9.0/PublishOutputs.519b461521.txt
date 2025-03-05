@@ -69,6 +69,7 @@ C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\p
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\Microsoft.SqlServer.Server.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\Microsoft.Win32.SystemEvents.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\MySqlConnector.dll
+C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\Newtonsoft.Json.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\ReactiveUI.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\publish\Serilog.dll

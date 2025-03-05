@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8d74d9b6-d559-4e19-8152-650369de6478" name="doublecodestudio" url="http://37.8.228.45">
+        <fileTransfer rootFolder="/ftp/NexusERP" host="37.8.228.45" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="df5f15cf-662f-442a-a412-a280782688b3" name="radius">
+        <fileTransfer rootFolder="/usr/share/nginx/html/downloads/NexusERP" accessType="SFTP" host="10.172.111.78" port="22" sshConfigId="3b4e8e3c-4a9d-48df-b9c1-9c3812c5681c" sshConfig="tdyda@10.172.111.78:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseSudo="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
