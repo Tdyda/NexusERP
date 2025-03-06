@@ -12,11 +12,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("NexusERP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.2+30e5e70140e425ef50f5faa76854a63a1e1a4c9a")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.3.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.3+a3d75597bff5beeaf954bb160e6de4481fe9550f")]
 [assembly: System.Reflection.AssemblyProductAttribute("NexusERP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NexusERP")]
-[assembly: System.Reflection.AssemblyVersionAttribute("0.0.2.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("0.0.3.0")]
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
 

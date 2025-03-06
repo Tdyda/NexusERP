@@ -63,57 +63,6 @@ namespace NexusERP.Services
             return 0;
         }
 
-        // private static async void ShowUpdateDialog(UpdateInfo updateInfo)
-        // {
-        //     var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-        //
-        //         var message = "Dostępna jest aktualizacja programu NexusERP. Czy chcesz ją zainstalować?";
-        //         var warningDialog = new WarningDialog(message);
-        //
-        //         if (mainWindow != null) await warningDialog.ShowDialog(mainWindow);
-        //
-        //         if (!warningDialog.IsConfirmed)
-        //         {
-        //             return;
-        //         }
-        //
-        //     try
-        //     {
-        //         string fileUrl = updateInfo.Url;
-        //         string tempFilePath = Path.Combine(Path.GetTempPath(), "NexusERP");
-        //         Debug.WriteLine($"temp: {tempFilePath}");
-        //
-        //         using (WebClient client = new WebClient())
-        //         {
-        //             client.DownloadFile(fileUrl, tempFilePath);
-        //         }
-        //
-        //         // Process process = Process.Start(new ProcessStartInfo
-        //         // {
-        //         //     FileName = tempFilePath,
-        //         //     UseShellExecute = true
-        //         // });
-        //
-        //         Environment.Exit(0);
-        //
-        //         // if (process != null)
-        //         // {
-        //         //     process.WaitForExit();
-        //         // }
-        //
-        //         // Po zakończeniu procesu instalacji usuwamy plik
-        //         if (File.Exists(tempFilePath))
-        //         {
-        //             File.Delete(tempFilePath);
-        //             Debug.WriteLine("Plik instalacyjny został usunięty.");
-        //         }
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         Debug.WriteLine($"Błąd podczas uruchamiania instalatora: {ex.Message}");
-        //     }
-        // }
-
         private static async void ShowUpdateDialog(UpdateInfo updateInfo)
         {
             var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
@@ -129,9 +78,9 @@ namespace NexusERP.Services
                 string fileUrl = updateInfo.Url;
                 string tempFolder = Path.Combine(Path.GetTempPath(), "NexusERP_Update");
                 string zipFilePath = Path.Combine(tempFolder, "NexusERP.zip");
-                string appDirectory = "C:\\NexusERP";
-                //string appDirectory = AppContext.BaseDirectory; // Główny katalog aplikacji
-                string updaterPath = Path.Combine(tempFolder, "Updater.bat"); // Zmieniamy na .bat
+                // string appDirectory = AppContext.BaseDirectory;
+                string appDirectory = "C://NexusERP";
+                string updaterPath = Path.Combine(tempFolder, "Updater.bat");
 
                 // Tworzenie katalogu tymczasowego
                 if (!Directory.Exists(tempFolder))
@@ -141,7 +90,6 @@ namespace NexusERP.Services
 
                 Debug.WriteLine($"Pobieranie aktualizacji do: {zipFilePath}");
 
-                // Pobranie ZIP z serwera
                 using (WebClient client = new WebClient())
                 {
                     client.DownloadFile(fileUrl, zipFilePath);
@@ -149,12 +97,10 @@ namespace NexusERP.Services
 
                 Debug.WriteLine("Pobieranie zakończone, kopiowanie Updater.bat...");
 
-                // Utwórz skrypt BAT zamiast EXE
                 File.WriteAllText(updaterPath, GetUpdaterScript(appDirectory, zipFilePath));
 
                 Debug.WriteLine("Uruchamianie Updater.bat...");
 
-                // Uruchomienie skryptu BAT
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = updaterPath,
@@ -171,29 +117,14 @@ namespace NexusERP.Services
 
         private static string GetUpdaterScript(string appDirectory, string zipFilePath)
         {
-            var destination = "C:\\NexusERP";
+            var exePath = Path.Combine(appDirectory, "NexusERP.exe");
             return $@"
-                timeout /t 3 /nobreak >nul
-                echo Rozpakowywanie aktualizacji...
-                powershell -ExecutionPolicy Bypass -NoProfile -Command ""Expand-Archive -Path '{zipFilePath}' -DestinationPath '{appDirectory}' -Force""
-                echo Uruchamianie nowej wersji...
-                start ""{Path.Combine(appDirectory, "NexusERP.exe")}""
-                ";
+        timeout /t 3 /nobreak >nul
+        echo Rozpakowywanie aktualizacji...
+        powershell -ExecutionPolicy Bypass -NoProfile -Command ""Expand-Archive -Path '{zipFilePath}' -DestinationPath '{appDirectory}' -Force""
+        echo Uruchamianie nowej wersji...
+        powershell -NoProfile -Command ""Start-Process '{exePath}'""
+        ";
         }
-
-        //private static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
-        //{
-        //    foreach (DirectoryInfo dir in source.GetDirectories())
-        //    {
-        //        DirectoryInfo targetSubDir = target.CreateSubdirectory(dir.Name);
-        //        CopyFilesRecursively(dir, targetSubDir);
-        //    }
-
-        //    foreach (FileInfo file in source.GetFiles())
-        //    {
-        //        string targetFilePath = Path.Combine(target.FullName, file.Name);
-        //        file.CopyTo(targetFilePath, true); // Nadpisanie pliku, jeśli istnieje
-        //    }
-        //}
     }
 }
