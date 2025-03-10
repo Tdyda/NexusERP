@@ -44,7 +44,7 @@
 						MinuteIncrement="15"
 						HorizontalAlignment="Right"
 						Margin="10"
-						SelectedTime="{Binding SelectedTime, Mode=OneWay}" />
+						SelectedTime="{Binding SelectedTime}, Mode=OneWay"/>
 		</Grid>
 
 		<DataGrid Name="Grid"
