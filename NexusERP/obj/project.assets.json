@@ -6972,7 +6972,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "0.0.3",
+    "version": "0.0.4",
     "restore": {
       "projectUniqueName": "C:\\Users\\tdyda\\source\\repos\\avaloniaTests\\NexusERP\\NexusERP\\NexusERP.csproj",
       "projectName": "NexusERP",

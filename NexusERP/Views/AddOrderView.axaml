@@ -4,60 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:NexusERP.ViewModels"
 			 xmlns:fa="using:FluentAvalonia.UI.Controls"
+			 xmlns:conv="using:NexusERP.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NexusERP.Views.AddOrderView"
 			 x:DataType="vm:AddOrderViewModel">
 
-	<ScrollViewer>
-		<StackPanel Name="StackPanel">
-			<ItemsControl Grid.Row="0" ItemsSource="{Binding FormItems}">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Grid Name="Grid" ColumnDefinitions="*,*,*,*,*,auto" RowDefinitions="*,*" Margin="10">
-							<Label Grid.Column="0" Grid.Row="0" Margin="10 0">Indeks</Label>
-							<Label Grid.Column="1" Grid.Row="0" Margin="10 0">Ilość</Label>
-							<Label Grid.Column="2" Grid.Row="0" Margin="10 0">Nazwa</Label>
-							<Label Grid.Column="3" Grid.Row="0" Margin="10 0">Komentarz</Label>
-							<Label Grid.Column="4" Grid.Row="0" Margin="10 0">Order_batch</Label>
+	<UserControl.Resources>
+		<!-- Definiowanie konwertera -->
+		<conv:ClientSelectedConverter x:Key="ClientSelectedConverter"/>
+	</UserControl.Resources>
 
-							<fa:FAComboBox x:Name="IndexComboBox"
-										   Grid.Column="0"
-										   Grid.Row="1"
-										   ItemsSource="{Binding AvalivableOptions}"
-										   LostFocus="IndexComboBox_LostFocus"
-										   IsEditable="True"
-										   Margin="10 0"
-										   HorizontalAlignment="Stretch"
-										   Text="{Binding Index, Mode=TwoWay}"
-										   PointerPressed="IndexComboBox_PointerPressed"
-										   IsTextSearchEnabled="False"
-										   PlaceholderText="Wpisz i filtruj..."/>
-							
-							<TextBox Grid.Column="1" Grid.Row="1" Watermark="Podaj ilość" Text="{Binding Quantity}" Margin="10 0"/>
-							<TextBox Grid.Column="2"
-									 Grid.Row="1"
-									 Watermark="Nazwa"
-									 Text="{Binding Name, Mode=TwoWay}"
-									 Margin="10 0"
-									 IsReadOnly="true"
-									 IsHitTestVisible="False"
-									 Focusable="False"/>
-							
-							<TextBox Grid.Column="3" Grid.Row="1" Watermark="Dodaj komentarz" Text="{Binding Comment}" Margin="10 0"/>
-							<TextBox Grid.Column="4" Grid.Row="1" Watermark="Order_batch" Text="{Binding OrderBatch}" Margin="10 0"/>
-							<Button Grid.Column="5"
-									Grid.Row="1"
-									Content="Usuń"
-									Command="{Binding #StackPanel((vm:AddOrderViewModel)DataContext).DeleteFormItem}"
-									CommandParameter="{Binding}"
-									HorizontalAlignment="Center"/>
-						</Grid>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-			<Button Grid.Row="1" Content="Dodaj surowiec" Command="{Binding AddFormItemCommand}" HorizontalAlignment="Center" Margin="10"/>
-			<Button Grid.Row="2" Content="Wyślij" Command="{Binding SubmitCommand}" HorizontalAlignment="Center"/>
-		</StackPanel>
-	</ScrollViewer>
+		<Grid Grid.Row="0" Name="main">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<TextBlock Text="Filtruj według Klienta:" Margin="10"/>
+			<StackPanel Orientation="Horizontal" Margin="10" Name="stackpanel">
+				<ItemsControl ItemsSource="{Binding ClientFilters}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<CheckBox Content="{Binding}"
+									  IsChecked="{Binding #stackpanel((vm:AddOrderViewModel)DataContext).SelectedClients, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ClientSelectedConverter}, ConverterParameter={Binding}}"
+									  CommandParameter="{Binding}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+
+
+			<!--<TextBlock Text="Filtruj według daty wysyłki:" Margin="10"/>
+			<StackPanel Orientation="Horizontal" Margin="10">
+				<ItemsControl ItemsSource="{Binding ShippingDateFilters}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<CheckBox Content="{Binding}" IsChecked="{Binding DataContext.SelectedShippingDates, Mode=TwoWay}" CommandParameter="{Binding}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>-->
+		</Grid>
+		
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="9*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+
+			<DataGrid Grid.Column="0"
+					  ItemsSource="{Binding MaterialRequests}"
+					  AutoGenerateColumns="False"
+					  HeadersVisibility="Column"
+					  HorizontalAlignment="Stretch"
+					  VerticalAlignment="Stretch"
+					  CanUserResizeColumns="True"
+					  GridLinesVisibility="All"
+					  BorderThickness="1" BorderBrush="Gray">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Klient" Binding="{Binding Client}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Indeks" Binding="{Binding Index}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Data wysyłki" Binding="{Binding ShippingDate}" Width="*" />
+					<DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Ilość wymagana" Binding="{Binding DemandedQuantity}" IsReadOnly="True" Width="*" />
+					<DataGridTextColumn Header="Ilość zamawiana" Binding="{Binding OrderQuantity, Mode=TwoWay}" Width="*" />
+					<DataGridTextColumn Header="Komentarz" Binding="{Binding Comment, Mode=TwoWay}" Width="*" />
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+	</Grid>
+
 </UserControl>

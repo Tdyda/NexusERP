@@ -9,19 +9,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Splat;
-using NexusERP.Enums;
-using System.Linq;
-using NexusERP.Views;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using System.Threading;
+using System.Linq;
 
 namespace NexusERP.ViewModels
 {
@@ -32,30 +27,58 @@ namespace NexusERP.ViewModels
         private PhmDbContext _phmDbContext;
 
         public string[] RequiredRoles => ["sk", "admin"];
-
-        private string _index;
         public string _name;
-        private double? _quantity;
-        private string? _comment;
-        private string _errorMessage;
         private AppDbContext _appDbContext;
-        private ObservableCollection<FormItem> _formItems;
-        private UserSession? _userSession;
         private ILogger<AddOrderViewModel> _logger;
-        private List<Order> _ordersList;
-        private string _orderBatch;
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-
+        private ObservableCollection<MaterialRequestModel> _materialRequests;
+        private ObservableCollection<string> _clientFilters;
+        private ObservableCollection<DateOnly> _shippingDateFilters;
+        private HashSet<string> _selectedClients = new HashSet<string>();
+        private HashSet<DateOnly> _selectedShippingDates = new HashSet<DateOnly>();
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
-
         public ICommand SubmitCommand { get; }
-        public ICommand DeleteFormItemCommand { get; }
-        public ICommand AddFormItemCommand { get; }
-
         private ObservableCollection<string> _avalivableOptions;
         private ObservableCollection<string> _allOptions;
         private string _searchText;
 
+        public ObservableCollection<MaterialRequestModel> MaterialRequests
+        {
+            get => _materialRequests;
+            set => this.RaiseAndSetIfChanged(ref _materialRequests, value);
+        }
+
+        public ObservableCollection<string> ClientFilters
+        {
+            get => _clientFilters;
+            set => this.RaiseAndSetIfChanged(ref _clientFilters, value);
+        }
+
+        public ObservableCollection<DateOnly> ShippingDateFilters
+        {
+            get => _shippingDateFilters;
+            set => this.RaiseAndSetIfChanged(ref _shippingDateFilters, value);
+        }
+
+        public HashSet<string> SelectedClients
+        {
+            get => _selectedClients;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedClients, value);
+                ApplyFilters();
+            }
+        }
+
+        public HashSet<DateOnly> SelectedShippingDates
+        {
+            get => _selectedShippingDates;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedShippingDates, value);
+                ApplyFilters();
+            }
+        }       
         public ObservableCollection<string> AvalivableOptions
         {
             get => _avalivableOptions;
@@ -79,97 +102,49 @@ namespace NexusERP.ViewModels
             HostScreen = screen;
             _phmDbContext = Locator.Current.GetService<PhmDbContext>() ?? throw new Exception("PhmDbContext service not found.");
             _appDbContext = Locator.Current.GetService<AppDbContext>() ?? throw new Exception("AppDbContext service not found.");
-            _userSession = Locator.Current.GetService<UserSession>() ?? throw new Exception("UserSession service not found");
             _logger = Locator.Current.GetService<ILogger<AddOrderViewModel>>() ?? throw new Exception("Logger service not found.");
-            SubmitCommand = ReactiveCommand.Create(Submit);
-            _formItems = new ObservableCollection<FormItem>();
-            AddFormItemCommand = ReactiveCommand.Create(AddFormItem);
-            DeleteFormItemCommand = ReactiveCommand.Create<FormItem>(DeleteFormItem);
             AvalivableOptions = new ObservableCollection<string>();
             AllOptions = new ObservableCollection<string>();
+            MaterialRequests = new ObservableCollection<MaterialRequestModel>();
+
+            this.WhenActivated(disposable =>
+            {
+                Observable.FromAsync(LoadMaterialRequests)
+                    .Subscribe()
+                    .DisposeWith(disposable);
+            });
 
             this.WhenActivated(disposables =>
             {
                 Observable.FromAsync(() => LoadRawMaterials())
                           .Subscribe()
                           .DisposeWith(disposables);
-            });
-            //_ = LoadRawMaterials();
+            });            
         }
 
-        public string Index
+        private async Task LoadMaterialRequests()
         {
-            get => _index;
-            set => this.RaiseAndSetIfChanged(ref _index, value);
-        }
+            var materialRequests = await _appDbContext.MaterialsRequest.ToListAsync();
 
-        public string Name
-        {
-            get => _name;
-            set => this.RaiseAndSetIfChanged(ref _name, value);
-        }
-
-        public double? Quantity
-        {
-            get => _quantity;
-            set
+            foreach (var item in materialRequests)
             {
-                if (string.IsNullOrWhiteSpace(value.ToString()))
-                {
-                    ErrorMessage = "Musisz podać liczbę!";
-                    _quantity = value;
-                    return;
-                }
-
-                if (!int.TryParse(value.ToString(), out int parsedValue) || parsedValue < 0)
-                {
-                    ErrorMessage = "Zamówienie musi być większe od 0!";
-                }
-                else
-                {
-                    ErrorMessage = string.Empty;
-                    _quantity = value;
-                }
-
-                this.RaiseAndSetIfChanged(ref _quantity, value);
+                MaterialRequests.Add(item);
             }
-        }
-        public string? Comment
-        {
-            get => _comment;
-            set => this.RaiseAndSetIfChanged(ref _comment, value);
-        }
-        public string OrderBatch
-        {
-            get => _orderBatch;
-            set => this.RaiseAndSetIfChanged(ref _orderBatch, value);
-        }
 
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
+            ClientFilters = [.. MaterialRequests.Select(r => r.Client).Distinct()];
+            ShippingDateFilters = [.. MaterialRequests.Select(r => r.ShippingDate).Distinct()];
         }
-
-        public ObservableCollection<FormItem> FormItems
+        private void ApplyFilters()
         {
-            get => _formItems;
-            set => this.RaiseAndSetIfChanged(ref _formItems, value);
-        }
-        private async void AddFormItem()
-        {
-            FormItems.Add(new FormItem(AvalivableOptions, AllOptions));
-        }
+            var filteredRequests = MaterialRequests.Where(r =>
+                (SelectedClients.Count == 0 || SelectedClients.Contains(r.Client)) &&
+                (SelectedShippingDates.Count == 0 || SelectedShippingDates.Contains(r.ShippingDate))
+            ).ToList();
 
-        public void DeleteFormItem(FormItem item)
-        {
-            FormItems.Remove(item);
+            MaterialRequests = new ObservableCollection<MaterialRequestModel>(filteredRequests);
         }
-
-
         private async Task LoadRawMaterials()
         {
-            // Czekamy na dostęp do semafora
             await _semaphore.WaitAsync();
 
             try
@@ -184,109 +159,11 @@ namespace NexusERP.ViewModels
             }
             catch (Exception ex)
             {
-                // Obsługa błędów
                 Debug.WriteLine($"Wystąpił błąd: {ex.Message}");
             }
             finally
             {
-                // Zwalniamy semafor po zakończeniu operacji
                 _semaphore.Release();
-            }
-        }
-
-        private async void Submit()
-        {
-            _ordersList = new List<Order>();
-            FormItem? currentItem = null;
-            try
-            {
-                foreach (var item in FormItems)
-                {
-                    currentItem = item;
-
-                    var order = new Order
-                    {
-                        Index = item.Index.Trim().ToUpper(),
-                        Name = item.Name.Trim().ToUpper(),
-                        Quantity = (double)item.Quantity,
-                        OrderDate = DateTime.Now,
-                        Status = OrderStatus.NotAccepted,
-                        ProdLine = _userSession.LocationName,
-                        Comment = item.Comment,
-                        OrderBatch = item.OrderBatch.Trim().ToUpper()
-                    };
-                    _ordersList.Add(order);
-
-                }
-                var checkOrders = _appDbContext.Orders
-                    .Where(o => o.OrderDate.Date == DateTime.Today)
-                    .GroupBy(o => new { o.Index, o.OrderBatch })
-                    .Select(g => new Order
-                    {
-                        Index = g.Key.Index,
-                        OrderBatch = g.Key.OrderBatch,
-                        Quantity = g.Sum(o => o.Quantity),
-                        OrderDate = DateTime.Today
-                    })
-                    .ToList();
-
-
-                foreach (var order in _ordersList)
-                {
-                    checkOrders.Add(order);
-                }
-
-                var duplicateOrders = checkOrders
-                    .GroupBy(o => new { o.Index, o.OrderBatch })
-                    .Where(g => g.Count() > 1)
-                    .Select(g => new { g.Key.Index, g.Key.OrderBatch, Count = g.Count() })
-                    .ToList();
-
-                if (duplicateOrders.Any())
-                {
-                    string errorMessage = "Znaleziono duplikaty zamówień dla:\n" +
-                        string.Join("\n", duplicateOrders.Select(d => $"Indeks: {d.Index}, Numer partii: {d.OrderBatch}"));
-
-                    // Pobieramy referencję do MainWindow
-                    var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-
-                    if (mainWindow != null)
-                    {
-                        var warningDialog = new WarningDialog(errorMessage);
-                        await warningDialog.ShowDialog(mainWindow);
-
-                        if (!warningDialog.IsConfirmed)
-                        {
-                            return;
-                        }
-                    }
-                }
-
-                foreach (var item in _ordersList)
-                {
-                    await _appDbContext.Orders.AddAsync(item);
-                }
-                await _appDbContext.SaveChangesAsync();
-                HostScreen.Router.Navigate.Execute(new AddOrderViewModel(HostScreen));
-
-            }
-            catch (Exception ex)
-            {
-                string itemInfo = currentItem != null ? $"Indeks: {currentItem.Index}, Nazwa: {currentItem.Name}, OrderBatch: {currentItem.OrderBatch}" : "Brak danych o elemencie";
-                _logger.LogError($"Błąd podczas przetwarzania elementu: {itemInfo}. Exception: {ex.Message}");
-
-                var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-                if (mainWindow != null)
-                {
-                    var errorMessage = "Wystąpił błąd podczas przetwarzania zamówień. Spróbuj ponownie.";
-                    var warningDialog = new WarningDialog(errorMessage);
-                    await warningDialog.ShowDialog(mainWindow);
-
-                    if (warningDialog.IsConfirmed)
-                    {
-                        return;
-                    }
-                }
             }
         }
     }

@@ -15,6 +15,7 @@ namespace NexusERP.Data
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Order> Orders { get; set; }
+        public DbSet<MaterialRequestModel> MaterialsRequest { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
                 : base(options)

@@ -374,3 +374,6 @@ C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\w
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\win-x64\mscordbi.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\win-x64\mscorrc.dll
 C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\bin\Release\net9.0\win-x64\msquic.dll
+C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Release\net9.0\win-x64\NexusERP.dll
+C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Release\net9.0\win-x64\refint\NexusERP.dll
+C:\Users\tdyda\source\repos\avaloniaTests\NexusERP\NexusERP\obj\Release\net9.0\win-x64\NexusERP.pdb

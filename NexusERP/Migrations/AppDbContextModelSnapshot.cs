@@ -218,6 +218,46 @@ namespace NexusERP.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("NexusERP.Models.MaterialRequestModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Client")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("DemandedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Index")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("OrderQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("ShippingDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaterialsRequest");
+                });
+
             modelBuilder.Entity("NexusERP.Models.Order", b =>
                 {
                     b.Property<int>("Id")

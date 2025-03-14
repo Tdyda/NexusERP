@@ -1,0 +1,6 @@
+2025-03-13 14:46:24.362 +01:00 [INF] ID: 
+2025-03-13 14:46:24.388 +01:00 [INF] Zalogowany: False
+2025-03-13 14:46:24.561 +01:00 [INF] ID: f9b33065-c108-4c50-9fb5-89421a490437
+2025-03-13 14:46:24.561 +01:00 [INF] Zalogowany: True
+2025-03-13 14:46:24.561 +01:00 [INF] Role: admin
+2025-03-13 16:00:43.455 +01:00 [ERR] Błąd podczas przetwarzania elementu: Indeks: OKAW-0000-0207, Nazwa: KARTON Excellent buffet Antipasti, OrderBatch: . Exception: Nullable object must have a value.
